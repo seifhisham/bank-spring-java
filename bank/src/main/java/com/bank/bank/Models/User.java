@@ -1,94 +1,61 @@
 package com.bank.bank.Models;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+// User entity
 @Entity
-@Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
-    private int userId;
-    
-    @Column(name = "username")
-    private String username;
-    
-    @Column(name = "password")
-    private String password;
-    
-    @Column(name = "email")
-    private String email;
-    
-    @Column(name = "role")
-    private String role;
-    
-    @Column(name = "active")
-    private boolean active;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected int id;
 
-    public User(int userId, String username, String password, String email, String role, boolean active) {
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-        this.active = active;
+    protected String name;
+
+    protected String address;
+
+    protected int phoneNumber;
+
+
+    public User(int id, String name, String address, int phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
     }
 
-    public int getUserId() {
-        return this.userId;
+    public User() {
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public int getId() {
+        return this.id;
     }
 
-    public String getUsername() {
-        return this.username;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getName() {
+        return this.name;
     }
 
-    public String getPassword() {
-        return this.password;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getAddress() {
+        return this.address;
     }
 
-    public String getEmail() {
-        return this.email;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public int getPhoneNumber() {
+        return this.phoneNumber;
     }
 
-    public String getRole() {
-        return this.role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public boolean isActive() {
-        return this.active;
-    }
-
-    public boolean getActive() {
-        return this.active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
 }
