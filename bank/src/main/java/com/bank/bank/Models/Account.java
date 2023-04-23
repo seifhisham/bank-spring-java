@@ -1,43 +1,74 @@
 package com.bank.bank.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "accounts")
+@Inheritance(strategy = InheritanceType.JOINED)
+
 public class Account {
 
-    public static final String AccountType = null;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String accountType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+   
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
+    public enum AccountType {
+        SAVING,
+        LOANING,
+        CHECKING
+    }
+    
+
+
     private double balance;
 
-    public Account() {
-    }
+    @Column(name = "interest_rate")
+    private double interestRate;
 
+    private String email;
 
-    public Account(Long id, String accountType, double balance) {
-        this.id = id;
+    private String password;
+
+    public Account() {}
+
+    public Account(User user, AccountType accountType, int balance, double interestRate, String email, String password) {
+        this.user = user;
         this.accountType = accountType;
         this.balance = balance;
+        this.interestRate = interestRate;
+        this.email = email;
+        this.password = password;
     }
 
     public Long getId() {
-        return this.id;
+        return this.id ;
     }
 
+    // getters and setters
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getAccountType() {
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public AccountType getAccountType() {
         return this.accountType;
     }
 
-    public void setAccountType(String accountType) {
+    public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
     }
 
@@ -48,5 +79,33 @@ public class Account {
     public void setBalance(double balance) {
         this.balance = balance;
     }
-    
-}
+
+    public double getInterestRate() {
+        return this.interestRate;
+    }
+
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+  
+    }  
+
+
+
