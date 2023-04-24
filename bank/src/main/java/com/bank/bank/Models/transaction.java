@@ -1,86 +1,64 @@
 package com.bank.bank.Models;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "transaction")
-public class transaction {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "source_account_id")
-    private Account sourceAccount;
+    private double amount;
 
-    @ManyToOne
-    @JoinColumn(name = "dest_account_id")
-    private Account destinationAccount;
+    private String date;
 
-    @Column(name = "amount")
-    private BigDecimal amount;
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
 
-    @Column(name = "date_time")
-    private LocalDateTime dateTime;
-
-
-    public transaction(int id, Account sourceAccount, Account destinationAccount, BigDecimal amount, LocalDateTime dateTime) {
-        this.id = id;
-        this.sourceAccount = sourceAccount;
-        this.destinationAccount = destinationAccount;
-        this.amount = amount;
-        this.dateTime = dateTime;
+    public enum TransactionType {
+        TRANSFERS, WITHDRAW_DEPOSIT
     }
 
-    public int getId() {
+    public Transaction() {
+    }
+
+    public Transaction(Long id, double amount, String date, TransactionType transactionType) {
+        this.id = id;
+        this.amount = amount;
+        this.date = date;
+        this.transactionType = transactionType;
+    }
+
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Account getSourceAccount() {
-        return this.sourceAccount;
-    }
-
-    public void setSourceAccount(Account sourceAccount) {
-        this.sourceAccount = sourceAccount;
-    }
-
-    public Account getDestinationAccount() {
-        return this.destinationAccount;
-    }
-
-    public void setDestinationAccount(Account destinationAccount) {
-        this.destinationAccount = destinationAccount;
-    }
-
-    public BigDecimal getAmount() {
+    public double getAmount() {
         return this.amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public LocalDateTime getDateTime() {
-        return this.dateTime;
+    public String getDate() {
+        return this.date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(String date) {
+        this.date = date;
     }
 
+    public TransactionType getTransactionType() {
+        return this.transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
 }
