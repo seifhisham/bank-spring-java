@@ -71,9 +71,9 @@ public class AccountController {
         if (account == null) {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
         }
-        //if (!body.containsKey("name")) {
-          // return new ResponseEntity<>("Name is required", HttpStatus.BAD_REQUEST);
-        //}
+        if (!body.containsKey("name")) {
+           return new ResponseEntity<>("Name is required", HttpStatus.BAD_REQUEST);
+        }
         account.setBalance(Double.parseDouble(body.get("balance")));
         account.setAccountType(Account.AccountType.valueOf(body.get("accountType")));
         account.setEmail(String.valueOf(body.get("email")));
@@ -82,7 +82,7 @@ public class AccountController {
         User user=new User();
         user.setId(Integer.parseInt(body.get("userid")));
         this.accountRepo.save(account);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(account, HttpStatus.OK);
     }
     
     
