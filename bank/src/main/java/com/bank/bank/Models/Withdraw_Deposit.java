@@ -3,7 +3,7 @@ package com.bank.bank.Models;
 import javax.persistence.*;
 
 @Entity
-public class Withdraw_Deposit extends Transaction {
+public class Withdraw_Deposit extends transaction {
     private String relatedAccount;
 
     public Withdraw_Deposit() {
