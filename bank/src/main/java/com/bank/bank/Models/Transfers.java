@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class Transfers extends Transaction {
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "source_account_id")
     private Account sourceAccount;
@@ -15,6 +15,5 @@ public class Transfers extends Transaction {
 
     public Transfers() {
     }
-
 
 }
