@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class transaction {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,10 +20,10 @@ public class transaction {
         TRANSFERS, WITHDRAW_DEPOSIT
     }
 
-    public transaction() {
+    public Transaction() {
     }
 
-    public transaction(Long id, double amount, String date, TransactionType transactionType) {
+    public Transaction(Long id, double amount, String date, TransactionType transactionType) {
         this.id = id;
         this.amount = amount;
         this.date = date;
