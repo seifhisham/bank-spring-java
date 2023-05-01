@@ -13,10 +13,10 @@ public class User {
 
     protected String address;
 
-    protected int phoneNumber;
+    protected String phoneNumber;
 
 
-    public User(int id, String name, String address, int phoneNumber) {
+    public User(int id, String name, String address, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -50,11 +50,11 @@ public class User {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return this.phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

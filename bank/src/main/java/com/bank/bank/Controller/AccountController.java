@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.bank.bank.Models.Account;
 import com.bank.bank.Models.User;
@@ -64,28 +66,22 @@ public class AccountController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
-    
     @PutMapping("/{id}")
-    public ResponseEntity updateaccount(@PathVariable long id, @RequestBody Map<String, String> body) {
-        Account account = accountRepo.findById(id).orElse(null);
-        if (account == null) {
-            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-        }
-        if (!body.containsKey("name")) {
-           return new ResponseEntity<>("Name is required", HttpStatus.BAD_REQUEST);
-        }
-        account.setBalance(Double.parseDouble(body.get("balance")));
-        account.setAccountType(Account.AccountType.valueOf(body.get("accountType")));
+    public ResponseEntity<Account> updateAccount(@PathVariable @NotNull Long id,
+                                                   @RequestBody @NotNull Map<String, String> body,
+                                                   @RequestParam(name = "name", required = true) @NotBlank String name) {
+        Account account = accountRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        account.setBalance(Double.parseDouble(body.getOrDefault("balance", "0.0")));
+        account.setAccountType(Account.AccountType.valueOf(body.getOrDefault("accountType", "CHECKING")));
         account.setEmail(String.valueOf(body.get("email")));
-        account.setInterestRate(Double.parseDouble(body.get("interestrate")));
+        account.setInterestRate(Double.parseDouble(body.getOrDefault("interestrate", "0.0")));
         account.setPassword(String.valueOf(body.get("password")));
-        User user=new User();
+        User user = new User();
         user.setId(Integer.parseInt(body.get("userid")));
+        //user.setName(name);
         this.accountRepo.save(account);
-        return new ResponseEntity<>(account, HttpStatus.OK);
+        return ResponseEntity.ok(account);
     }
     
-    
-   
 }
    

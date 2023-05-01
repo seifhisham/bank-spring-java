@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bank.bank.Models.Transaction;
+import com.bank.bank.Models.transaction;
 
 import com.bank.bank.Models.Account;
 import com.bank.bank.Models.User;
@@ -37,16 +37,16 @@ public class TransactionController {
     @GetMapping("")
     public ResponseEntity GetTransaction() {
         loggingService.log("User fetched all Transctipts");
-        List<Transaction> Trans = this.transRepo.findAll();
+        List<transaction> Trans = this.transRepo.findAll();
         return new ResponseEntity(Trans, HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity<Transaction> createTransaction(@RequestBody Map<String, String> body) {
-        Transaction transaction = new Transaction();
+    public ResponseEntity<transaction> createTransaction(@RequestBody Map<String, String> body) {
+        transaction transaction = new transaction();
 
         transaction.setAmount(Double.parseDouble(body.get("amount")));
-        transaction.setTransactionType(Transaction.TransactionType.valueOf(body.get("transactionType")));
+        transaction.setTransactionType(transaction.getTransactionType().valueOf(body.get("transactionType")));
         transaction.setDate(String.valueOf(body.get("Date")));
 
         this.transRepo.save(transaction);

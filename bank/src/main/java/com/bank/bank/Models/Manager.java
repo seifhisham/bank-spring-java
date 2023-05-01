@@ -4,7 +4,7 @@ import javax.persistence.*;
 @Entity
 public class Manager extends User {
 
-    public Manager(int id, String name, String address, int phoneNumber) {
+    public Manager(int id, String name, String address, String phoneNumber) {
         super(id, name, address, phoneNumber);
         //TODO Auto-generated constructor stub
     }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Transfers extends Transaction {
+public class Transfers extends transaction {
     private String sourceAccount;
     private String destinationAccount;
 
