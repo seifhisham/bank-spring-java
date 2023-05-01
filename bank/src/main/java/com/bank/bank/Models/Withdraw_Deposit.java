@@ -4,21 +4,12 @@ import javax.persistence.*;
 
 @Entity
 public class Withdraw_Deposit extends Transaction {
-    private String relatedAccount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    private Account relatedAccount;
 
     public Withdraw_Deposit() {
-    }
-
-    public Withdraw_Deposit(String relatedAccount) {
-        this.relatedAccount = relatedAccount;
-    }
-
-    public String getRelatedAccount() {
-        return this.relatedAccount;
-    }
-
-    public void setRelatedAccount(String relatedAccount) {
-        this.relatedAccount = relatedAccount;
     }
 
 }
