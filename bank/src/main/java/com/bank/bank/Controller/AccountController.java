@@ -2,11 +2,12 @@ package com.bank.bank.Controller;
 
 import java.util.List;
 import java.util.Map;
-
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,11 +52,12 @@ public class AccountController {
         account.setEmail(String.valueOf(body.get("email")));
         account.setInterestRate(Double.parseDouble(body.get("interestrate")));
         account.setPassword(String.valueOf(body.get("password")));
-        User user=new User();
+        User user = new User();
         user.setId(Integer.parseInt(body.get("userid")));
         this.accountRepo.save(account);
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteAccount(@PathVariable Long id) {
         java.util.Optional<Account> accountOptional = this.accountRepo.findById(id);
@@ -66,24 +68,23 @@ public class AccountController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
-   @PutMapping("/{id}")
-public ResponseEntity<Account> updateAccount(@PathVariable @NotNull Long id,
-                                               @RequestBody @NotNull Map<String, String> body,
-                                               @RequestParam(name = "name", required = true) @NotBlank String name) {
-    Account account = accountRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-    account.setBalance(Double.parseDouble(body.getOrDefault("balance", "0.0")));
-    account.setAccountType(Account.AccountType.valueOf(body.getOrDefault("accountType", "CHECKING")));
-    account.setEmail(String.valueOf(body.get("email")));
-    account.setInterestRate(Double.parseDouble(body.getOrDefault("interestrate", "0.0")));
-    account.setPassword(String.valueOf(body.get("password")));
-    User user = new User();
-    user.setId(Integer.parseInt(body.get("userid")));
-    //account.setName(name);
-    this.accountRepo.save(account);
-    return ResponseEntity.ok(account);
-}
 
-    
-   
+    @PutMapping("/{id}")
+    public ResponseEntity<Account> updateAccount(@PathVariable @NonNull Long id,
+            @RequestBody @NonNull Map<String, String> body,
+            @RequestParam(name = "name", required = true) @NotBlank String name) {
+        Account account = accountRepo.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        account.setBalance(Double.parseDouble(body.getOrDefault("balance", "0.0")));
+        account.setAccountType(Account.AccountType.valueOf(body.getOrDefault("accountType", "CHECKING")));
+        account.setEmail(String.valueOf(body.get("email")));
+        account.setInterestRate(Double.parseDouble(body.getOrDefault("interestrate", "0.0")));
+        account.setPassword(String.valueOf(body.get("password")));
+        User user = new User();
+        user.setId(Integer.parseInt(body.get("userid")));
+
+        this.accountRepo.save(account);
+        return ResponseEntity.ok(account);
+    }
+
 }
-   
