@@ -2,7 +2,11 @@ package com.bank.bank.Controller;
 
 import java.util.List;
 import java.util.Map;
+
+
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -70,8 +74,10 @@ public class AccountController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Account> updateAccount(@PathVariable @NonNull Long id,
-            @RequestBody @NonNull Map<String, String> body,
+
+    public ResponseEntity<Account> updateAccount(@PathVariable @NotNull Long id,
+            @RequestBody @NotNull Map<String, String> body,
+
             @RequestParam(name = "name", required = true) @NotBlank String name) {
         Account account = accountRepo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
