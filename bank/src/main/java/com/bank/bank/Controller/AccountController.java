@@ -3,12 +3,15 @@ package com.bank.bank.Controller;
 import java.util.List;
 import java.util.Map;
 
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,8 +74,10 @@ public class AccountController {
     }
 
     @PutMapping("/{id}")
+
     public ResponseEntity<Account> updateAccount(@PathVariable @NotNull Long id,
             @RequestBody @NotNull Map<String, String> body,
+
             @RequestParam(name = "name", required = true) @NotBlank String name) {
         Account account = accountRepo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
@@ -83,7 +88,7 @@ public class AccountController {
         account.setPassword(String.valueOf(body.get("password")));
         User user = new User();
         user.setId(Integer.parseInt(body.get("userid")));
-        // account.setName(name);
+
         this.accountRepo.save(account);
         return ResponseEntity.ok(account);
     }
