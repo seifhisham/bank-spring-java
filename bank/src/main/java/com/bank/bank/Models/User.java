@@ -1,13 +1,19 @@
 package com.bank.bank.Models;
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+
 // User entity
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    protected String id;
 
     protected String name;
 
@@ -17,19 +23,32 @@ public class User {
 
     public User() {
     }
+    private String email;
+
+    private String password;
+
 
     public User(long id, String name, String address, String phoneNumber) {
+    public User(String id, String name, String address, String phoneNumber, String email, String password) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
     }
 
     public long getId() {
+
+    public User() {
+    }
+
+    public String getId() {
         return this.id;
     }
 
     public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -55,6 +74,23 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

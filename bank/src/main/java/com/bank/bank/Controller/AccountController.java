@@ -53,11 +53,11 @@ public class AccountController {
         // body
         account.setBalance(Double.parseDouble(body.get("balance")));
         account.setAccountType(Account.AccountType.valueOf(body.get("accountType")));
-        account.setEmail(String.valueOf(body.get("email")));
+        
         account.setInterestRate(Double.parseDouble(body.get("interestrate")));
-        account.setPassword(String.valueOf(body.get("password")));
+       
         User user = new User();
-        user.setId(Integer.parseInt(body.get("userid")));
+        user.setId(String.valueOf(body.get("userid")));
         this.accountRepo.save(account);
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
@@ -83,11 +83,11 @@ public class AccountController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
         account.setBalance(Double.parseDouble(body.getOrDefault("balance", "0.0")));
         account.setAccountType(Account.AccountType.valueOf(body.getOrDefault("accountType", "CHECKING")));
-        account.setEmail(String.valueOf(body.get("email")));
+       
         account.setInterestRate(Double.parseDouble(body.getOrDefault("interestrate", "0.0")));
-        account.setPassword(String.valueOf(body.get("password")));
+        
         User user = new User();
-        user.setId(Integer.parseInt(body.get("userid")));
+        user.setId(String.valueOf(body.get("userid")));
 
         this.accountRepo.save(account);
         return ResponseEntity.ok(account);

@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymleaf.org">
+
+    <head>
+        <title>List Posts</title>
+    </head>
+
+    <body>
+        <div>
+            <h3>List Posts</h3>
+            <hr/>
+            <a th:href="@{/thymeleaf/View-User}">Create Post</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>name</th>
+                        <th>address</th>
+                        <th>phoneNumber</th>
+                        <th>email</th>
+                        <th>password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user: ${users}">
+                        <td th:text="${user.id}"/>
+                        <td th:text="${user.name}"/>
+                        <td th:text="${user.address}"/>
+                        <td th:text="${user.phoneNumber}"/>
+                        <td th:text="${user.email}"/>
+                        <td th:text="${user.password}"/>
+                        <td>
+                            <a th:href="@{/thymeleaf/update-post(Id=${user.id})}">Update</a>
+                            <a th:href="@{/thymeleaf/delete-post(Id=${user.id})}">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+
+</html>
