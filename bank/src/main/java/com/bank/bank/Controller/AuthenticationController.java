@@ -20,11 +20,25 @@ public class AuthenticationController {
     @Autowired
     private UserRepo userRepo;
     @GetMapping("View-User")
-    public ModelAndView getAddPostForm(){
+    public ModelAndView getPost(){
         ModelAndView mav = new ModelAndView("Authentication.html");
        
         List<User> userList = userRepo.findAll();
         mav.addObject("users", userList);
         return mav;
     }
+    @GetMapping("add-post")
+    public ModelAndView getAddPostForm(){
+        ModelAndView mav = new ModelAndView("AddUser.html");
+        User user = new User();
+        mav.addObject("user", user);
+        return mav;
+    }
+
+    @PostMapping("save-post")
+    public String savePost(@ModelAttribute User user){
+        this.userRepo.save(user);
+        return "redirect:/thymeleaf/View-User";
+    }
 }
+
