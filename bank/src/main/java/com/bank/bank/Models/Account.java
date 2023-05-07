@@ -32,9 +32,7 @@ public class Account {
     @Column(name = "interest_rate")
     private double interestRate;
 
-    private String email;
-
-    private String password;
+  
 
     public Account() {}
 
@@ -43,8 +41,7 @@ public class Account {
         this.accountType = accountType;
         this.balance = balance;
         this.interestRate = interestRate;
-        this.email = email;
-        this.password = password;
+       
     }
 
     public Long getId() {
@@ -88,22 +85,7 @@ public class Account {
         this.interestRate = interestRate;
     }
 
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+  
   
     }  
 
