@@ -46,6 +46,14 @@ public class AuthenticationController {
         this.userRepo.deleteById(id);        
         return "redirect:/thymeleaf/View-User";
     }
+
+    @GetMapping("update-post")
+    public ModelAndView getUpdatePostForm(@RequestParam String Id){
+        ModelAndView mav = new ModelAndView("AddUser.html");
+        User olduser = this.userRepo.findById((String)Id).orElse(null);
+        mav.addObject("user", olduser);
+        return mav;
+    }
     
 }
 
