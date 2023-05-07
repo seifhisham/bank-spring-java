@@ -40,5 +40,12 @@ public class AuthenticationController {
         this.userRepo.save(user);
         return "redirect:/thymeleaf/View-User";
     }
+
+    @GetMapping("delete-post")
+    public String deletePost(@RequestParam("Id") String id){
+        this.userRepo.deleteById(id);        
+        return "redirect:/thymeleaf/View-User";
+    }
+    
 }
 

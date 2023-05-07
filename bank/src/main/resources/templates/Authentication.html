@@ -29,8 +29,8 @@
                         <td th:text="${user.email}"/>
                         <td th:text="${user.password}"/>
                         <td>
-                            <!-- <a th:href="@{/thymeleaf/update-post(postId=${user.id})}">Update</a>
-                            <a th:href="@{/thymeleaf/delete-post(postId=${user.id})}">Delete</a> -->
+                            <a th:href="@{/thymeleaf/update-post(Id=${user.id})}">Update</a>
+                            <a th:href="@{/thymeleaf/delete-post(Id=${user.id})}">Delete</a>
                         </td>
                     </tr>
                 </tbody>
