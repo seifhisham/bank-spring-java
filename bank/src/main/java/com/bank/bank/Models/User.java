@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
+    protected long id;
 
     protected String name;
 
@@ -15,22 +15,21 @@ public class User {
 
     protected String phoneNumber;
 
+    public User() {
+    }
 
-    public User(int id, String name, String address, String phoneNumber) {
+    public User(long id, String name, String address, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
 
-    public User() {
-    }
-
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
