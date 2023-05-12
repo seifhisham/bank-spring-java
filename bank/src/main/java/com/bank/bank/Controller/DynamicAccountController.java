@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bank.bank.Models.Account;
+import com.bank.bank.Models.AccountType;
 import com.bank.bank.Repositories.AccountRepo;
+import com.bank.bank.Repositories.AccountTypeRepo;
+import com.bank.bank.Repositories.UserRepo;
 
 @Controller
 @RequestMapping("/thymeleaf")
@@ -20,44 +23,34 @@ public class DynamicAccountController {
 
     @Autowired
     private AccountRepo accountRepo;
+    @Autowired
+    private AccountTypeRepo accountTypeRepo;
+    @Autowired
+    private UserRepo userRepo;
 
-  
     @GetMapping("View-Account")
     public ModelAndView getAccountList() {
-    ModelAndView mav = new ModelAndView("AddAccount.html");
-    List<Account> accountList = accountRepo.findAll();
-    mav.addObject("accounts", accountList);
-    return mav;
+        ModelAndView mav = new ModelAndView("AddAccount.html");
+        List<Account> accountList = accountRepo.findAll();
+        mav.addObject("account", accountList);
+        return mav;
     }
 
     @GetMapping("add-account")
-    public ModelAndView getAddPostForm() {
-        ModelAndView mav = new ModelAndView("Addaccount.html");
+    public ModelAndView getAddAccountForm() {
+        ModelAndView mav = new ModelAndView("AddType.html");
         Account account = new Account();
+
         mav.addObject("account", account);
+        mav.addObject("accountTypes", accountTypeRepo.findAll());
+        mav.addObject("users", userRepo.findAll());
         return mav;
     }
 
-    @PostMapping("save-accounttype")
-    public String savePost(@ModelAttribute Account account) {
-
+    @PostMapping("save-account")
+    public String saveAccount(@ModelAttribute Account account) {
         this.accountRepo.save(account);
-
-        return "redirect:/thymeleaf/View-account";
-
+        return "redirect:/thymeleaf/View-Account";
     }
 
-    @GetMapping("delete-account")
-    public String deletePost(@RequestParam("Id") Long Id) {
-        this.accountRepo.deleteById(Id);
-        return "redirect:/thymeleaf/View-account";
-    }
-
-    @GetMapping("update-account")
-    public ModelAndView getUpdatePostForm(@RequestParam("Id") Long Id) {
-        ModelAndView mav = new ModelAndView("Addaccount.html");
-        Account account = this.accountRepo.findById(Id).orElse(null);
-        mav.addObject("account", account);
-        return mav;
-    }
 }
