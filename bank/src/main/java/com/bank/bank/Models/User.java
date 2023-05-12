@@ -1,7 +1,11 @@
 package com.bank.bank.Models;
+import java.util.Collection;
+import java.util.Optional;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
+//import org.springframework.security.core.GrantedAuthority;
 
 // User entity
 @Entity
@@ -9,8 +13,6 @@ import org.hibernate.annotations.GenericGenerator;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected long id;
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     protected String id;
@@ -21,14 +23,11 @@ public class User {
 
     protected String phoneNumber;
 
-    public User() {
-    }
     private String email;
 
     private String password;
 
 
-    public User(long id, String name, String address, String phoneNumber) {
     public User(String id, String name, String address, String phoneNumber, String email, String password) {
         this.id = id;
         this.name = name;
@@ -38,7 +37,6 @@ public class User {
         this.password = password;
     }
 
-    public long getId() {
 
     public User() {
     }
@@ -47,7 +45,6 @@ public class User {
         return this.id;
     }
 
-    public void setId(long id) {
     public void setId(String id) {
         this.id = id;
     }
@@ -91,6 +88,16 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    // public Collection<? extends GrantedAuthority> getAuthorities() {
+    //     return null;
+    // }
+
+
+    public Object getUsername() {
+        return null;
     }
 
 }
