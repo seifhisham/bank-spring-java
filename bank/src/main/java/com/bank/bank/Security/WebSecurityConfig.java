@@ -33,7 +33,7 @@ public class WebSecurityConfig {
 
                 .authorizeRequests()
 
-                .antMatchers("/goodbye").hasAuthority("ADMIN") // Allowing access to "/goodbye" only for users with
+                 .antMatchers("/thymeleaf/View-User").hasAuthority("ADMIN") 
 
                 // ADMIN authority
 
