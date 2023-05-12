@@ -2,9 +2,12 @@
 
 <head>
 	<title>Add User</title>
+    <link rel="stylesheet" type="text/css" href="/css/adduser.css">
+    
 </head>
 
 <body>
+    <div>
 	<h1>Add User</h1>
 	<form th:action="@{/thymeleaf/save-post}" method="POST" th:object="${user}">
 
@@ -47,6 +50,7 @@
 	</form>
 
 	<a href="/thymeleaf/Authentication">Back to Authentication</a>
+</div>
 </body>
 
 </html>
