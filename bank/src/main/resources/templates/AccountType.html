@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymleaf.org">
+
+
+    <head>
+        <title>List Posts</title>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/viewuser.css"> -->
+    </head>
+
+    <body>
+        <div>
+            <h2>List Posts</h2>
+            <hr/>
+            <a th:href="@{/thymeleaf/View-User}">Create Post</a>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>title</th>
+                        <th>interestRate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="type: ${accountTypes}">
+                        <td th:text="${type.title}"/>
+                        <td th:text="${type.interestRate}"/>
+                        <td>
+                            <a th:href="@{/thymeleaf/update-accounttype(Id=${type.id})}">Edit</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/thymeleaf/delete-accounttype(Id=${type.id})}">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

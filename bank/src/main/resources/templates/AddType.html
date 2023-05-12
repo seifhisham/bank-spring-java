@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Add User</title>
+</head>
+
+<body>
+    <div>
+	<h1>Add User</h1>
+	<form th:action="@{/thymeleaf/save-accounttype}" method="POST" th:object="${accountTypes}">
+
+		<label for="title">title:</label>
+
+		<input type="text" id="title" name="title" th:field="*{title}" />
+
+		<label for="interestRate">interestRate:</label>
+
+		<input type="text" id="interestRate" name="interestRate" th:field="*{interestRate}" />
+
+		<input type="hidden" id="id" name="id" th:field="*{id}" />
+
+
+
+		<button type="submit">Save</button>
+
+	</form>
+
+	<a href="/thymeleaf/Authentication">Back to Authentication</a>
+</div>
+</body>
+
+</html>
