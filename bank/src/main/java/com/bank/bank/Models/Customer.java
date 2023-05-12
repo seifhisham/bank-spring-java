@@ -10,8 +10,5 @@ public class Customer extends User {
         //TODO Auto-generated constructor stub
     }
 
-
-        //TODO Auto-generated constructor stub
-    }
-   
-
+    // TODO Auto-generated constructor stub
+}

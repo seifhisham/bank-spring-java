@@ -1,4 +1,5 @@
 package com.bank.bank.Models;
+
 import javax.persistence.*;
 
 @Entity

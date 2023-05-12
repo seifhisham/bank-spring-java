@@ -1,4 +1,5 @@
 package com.bank.bank.Models;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,11 +10,10 @@ public class Employee extends User {
         //TODO Auto-generated constructor stub
     }
 
-   
-        //TODO Auto-generated constructor stub
-    }
-    // Additional attributes for Employee
-    // ...
+    // TODO Auto-generated constructor stub
+}
+// Additional attributes for Employee
+// ...
 
-    // Constructors, Getters, and Setters for attributes
-    // ...
+// Constructors, Getters, and Setters for attributes
+// ...
