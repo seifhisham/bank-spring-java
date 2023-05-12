@@ -38,7 +38,7 @@ public class DynamicAccountController {
 
     @GetMapping("add-account")
     public ModelAndView getAddAccountForm() {
-        ModelAndView mav = new ModelAndView("AddType.html");
+        ModelAndView mav = new ModelAndView("AddAccount.html");
         Account account = new Account();
 
         mav.addObject("account", account);
