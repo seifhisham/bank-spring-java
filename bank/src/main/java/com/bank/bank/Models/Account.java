@@ -1,6 +1,7 @@
 package com.bank.bank.Models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "accounts")
@@ -16,39 +17,29 @@ public class Account {
     @JoinColumn(name = "user_id")
     private User user;
 
-   
-    @Enumerated(EnumType.STRING)
-    private AccountType accountType;
-    public enum AccountType {
-        SAVING,
-        LOANING,
-        CHECKING
-    }
-    
+  
 
+   @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Type_id")
+    private AccountType accounttype;
 
     private double balance;
 
-    @Column(name = "interest_rate")
-    private double interestRate;
 
-  
+    public Account() {
+    }
 
-    public Account() {}
-
-    public Account(User user, AccountType accountType, int balance, double interestRate, String email, String password) {
+    public Account(Long id, User user, AccountType accounttype, double balance) {
+        this.id = id;
         this.user = user;
-        this.accountType = accountType;
+        this.accounttype = accounttype;
         this.balance = balance;
-        this.interestRate = interestRate;
-       
     }
 
     public Long getId() {
-        return this.id ;
+        return this.id;
     }
 
-    // getters and setters
     public void setId(Long id) {
         this.id = id;
     }
@@ -61,12 +52,12 @@ public class Account {
         this.user = user;
     }
 
-    public AccountType getAccountType() {
-        return this.accountType;
+    public AccountType getAccounttype() {
+        return this.accounttype;
     }
 
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
+    public void setAccounttype(AccountType accounttype) {
+        this.accounttype = accounttype;
     }
 
     public double getBalance() {
@@ -77,13 +68,28 @@ public class Account {
         this.balance = balance;
     }
 
-    public double getInterestRate() {
-        return this.interestRate;
+    public Account id(Long id) {
+        setId(id);
+        return this;
     }
 
-    public void setInterestRate(double interestRate) {
-        this.interestRate = interestRate;
+    public Account user(User user) {
+        setUser(user);
+        return this;
     }
+
+    public Account accounttype(AccountType accounttype) {
+        setAccounttype(accounttype);
+        return this;
+    }
+
+    public Account balance(double balance) {
+        setBalance(balance);
+        return this;
+    }
+
+
+
 
   
   
