@@ -22,8 +22,6 @@ import java.util.Objects;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected long id;
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     protected String id;
@@ -34,52 +32,32 @@ public class User implements UserDetails {
 
     protected String phoneNumber;
 
-<<<<<<< Updated upstream
-    public User() {
-    }
-    private String email;
-=======
     @Column(unique = true)
     private String username;
->>>>>>> Stashed changes
 
     @JsonIgnore
     private String password;
 
     private String role;
 
-<<<<<<< Updated upstream
-    public User(long id, String name, String address, String phoneNumber) {
-    public User(String id, String name, String address, String phoneNumber, String email, String password) {
-=======
     public User() {
     }
 
     public User(String id, String name, String address, String phoneNumber, String username, String password,
             String role) {
->>>>>>> Stashed changes
         this.id = id;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = password;
-<<<<<<< Updated upstream
-    }
-
-    public long getId() {
-
-    public User() {
-=======
         this.role = role;
->>>>>>> Stashed changes
     }
 
     public String getId() {
         return this.id;
     }
 
-    public void setId(long id) {
     public void setId(String id) {
         this.id = id;
     }
