@@ -57,7 +57,7 @@ public class DynamicAccountTypeController {
 
     @GetMapping("update-account-type")
     public ModelAndView getUpdatePostForm(@RequestParam("Id") Long Id) {
-        ModelAndView mav = new ModelAndView("Addaccount.html");
+        ModelAndView mav = new ModelAndView("AddType.html");
         AccountType accountType = this.accountTypeRepo.findById(Id).orElse(null);
         mav.addObject("accountTypes", accountType);
         return mav;
