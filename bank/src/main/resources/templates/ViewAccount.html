@@ -12,7 +12,7 @@
         <thead>
             <tr>
                 <th>Account ID</th>
-                <th>User Name</th>
+                <th>User ID</th>
                 <th>Account Type</th>
                 <th>Balance</th>
             </tr>
@@ -23,7 +23,15 @@
                 <td th:text="${account.user.id}"></td>
                 <td th:text="${account.accounttype.id}"></td>
                 <td th:text="${account.balance}"></td>
+
+                <td>
+                    <a th:href="@{/thymeleaf/update-account(Id=${account.id})}">Edit</a>
+                </td>
+                <td>
+                    <a th:href="@{/thymeleaf/delete-account(Id=${account.id})}">Delete</a>
+                </td>
             </tr>
+
         </tbody>
     </table>
 </body>
