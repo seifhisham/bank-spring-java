@@ -12,4 +12,12 @@ public class Withdraw_Deposit extends Transaction {
     public Withdraw_Deposit() {
     }
 
+    public Account getRelatedAccount() {
+        return this.relatedAccount;
+    }
+
+    public void setRelatedAccount(Account relatedAccount) {
+        this.relatedAccount = relatedAccount;
+    }
+
 }
