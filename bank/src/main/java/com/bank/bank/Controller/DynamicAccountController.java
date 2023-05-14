@@ -78,5 +78,16 @@ public class DynamicAccountController {
         return "redirect:/thymeleaf/View-Account";
     }
 
+    @GetMapping("update-account")
+    public ModelAndView getUpdatePostForm(@RequestParam("Id") Long Id) {
+        ModelAndView mav = new ModelAndView("Addaccount.html");
+
+        mav.addObject("accountTypes", accountTypeRepo.findAll());
+        mav.addObject("users", userRepo.findAll());
+        Account account = this.accountRepo.findById(Id).orElse(null);
+
+        mav.addObject("accounts", account);
+        return mav;
+    }
+
 }
-// @AuthenticationPrincipal User user
