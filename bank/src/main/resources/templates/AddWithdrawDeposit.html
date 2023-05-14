@@ -10,7 +10,7 @@
 <body>
     <h1>Withdraw/Deposit Form</h1>
 
-    <form action="#" th:action="@{/save-withdraw}" th:object="${withdrawDeposit}" method="post">
+    <form action="#" th:action="@{/thymeleaf/save-withdraw}" th:object="${withdrawDeposit}" method="post">
         <div>
             <label for="accountId">Account ID:</label>
             <input type="number" id="accountId" name="accountId" required />
