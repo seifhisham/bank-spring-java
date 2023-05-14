@@ -3,23 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Add Account</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
   <h1>Add Account</h1>
-  <form method="post" th:action="@{/thymeleaf/save-account}" th:object="${accountTypes}">
-    <p>User ID: <input type=" number" name="user.id" required>
-    </p>
-    <p>Account Type:
-      <select name="accountType" required>
-        <option th:each="accountType : ${accountTypes}" th:value="${accountType.id}" th:text="${accountType.title}">
-
-        </option>
-      </select>
-    </p>
-    <p>Balance: <input type="number" name="balance" required></p>
-    <input type="submit" value="Add Account">
-  </form>
+  <div>
+    <form id="account-form" th:object="${account}" method="post" th:action="@{/thymeleaf/save-account}">
+      <p>Account Type:
+        <select name="accountType" required>
+          <option th:each="accountType : ${accountTypes}" th:value="${accountType.id}" th:text="${accountType.title}">
+          </option>
+        </select>
+      </p>
+      <p>Balance: <input type="number" name="balance" required></p>
+      <button class="save-btn">Save</button>
+    </form>
+  </div>
 </body>
 
-</html>
+<!-- <script>
+  $(document).ready(function () {
+    $(".save-btn").click(function (event) {
+      event.preventDefault();
+      var accountType = $("#account-form select[name='accountType']").val();
+      var balance = $("#account-form input[name='balance']").val();
+      alert(accountType);
+      alert(balance);
+      $.ajax({
+        type: "POST",
+        url: "/thymeleaf/save-account",
+        data: {
+          accountType: accountType,
+          balance: balance
+        }
+
+      });
+    });
+  });
+</script> -->
