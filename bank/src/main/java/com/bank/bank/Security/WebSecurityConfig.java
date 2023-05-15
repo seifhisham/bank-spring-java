@@ -49,7 +49,7 @@ public class WebSecurityConfig {
 
                 .loginProcessingUrl("/thymeleaf/login/save") // Specifying the URL for processing the login form
 
-                .defaultSuccessUrl("/thymeleaf/View-User") // Specifying the default URL to redirect after successful
+                .defaultSuccessUrl("/Home.html") // Specifying the default URL to redirect after successful
 
                 // login
 
