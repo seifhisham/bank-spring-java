@@ -15,7 +15,6 @@ import com.bank.bank.Services.WithdrawDepositService;
 
 @Controller
 @RequestMapping("/thymeleaf")
-
 public class DynamicWithdrawDepositController {
 
     @Autowired
