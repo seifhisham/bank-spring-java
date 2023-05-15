@@ -29,7 +29,7 @@ public class WebSecurityConfig {
 
         // Configuring the HTTP security
 
-        http.userDetailsService(userService) // Using the user service for user details
+        http.userDetailsService(userService)
 
                 .authorizeRequests()
 
