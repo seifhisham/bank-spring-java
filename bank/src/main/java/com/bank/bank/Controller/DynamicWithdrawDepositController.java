@@ -1,19 +1,12 @@
 package com.bank.bank.Controller;
-
-import java.sql.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.bank.bank.Models.Transaction.TransactionType;
-import com.bank.bank.Models.Account;
 import com.bank.bank.Models.Transaction;
 import com.bank.bank.Models.Withdraw_Deposit;
 import com.bank.bank.Repositories.AccountRepo;
@@ -22,7 +15,6 @@ import com.bank.bank.Services.WithdrawDepositService;
 
 @Controller
 @RequestMapping("/thymeleaf")
-
 public class DynamicWithdrawDepositController {
 
     @Autowired
@@ -56,10 +48,15 @@ public class DynamicWithdrawDepositController {
     public String saveWithdraw(
             @RequestParam("accountId") Long accountId,
             @RequestParam("amount") double amount,
-            @RequestParam("transactionType") Transaction.TransactionType transactionType,
-            @RequestParam("date") String date) {
+            @RequestParam("type") Withdraw_Deposit.Type type,
+            @RequestParam("date") String date)
 
-        withdrawDepositService.SaveWithdraw(amount, date, transactionType, accountId);
+            {
+                Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
+                withdraw_Deposit.setTransactionType(Transaction.TransactionType.WITHDRAW_DEPOSIT);
+
+
+        withdrawDepositService.SaveWithdraw(amount, date, type, accountId);
 
         return "redirect:/thymeleaf/view-withdraw";
     }
