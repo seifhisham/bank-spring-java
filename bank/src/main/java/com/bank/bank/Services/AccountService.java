@@ -29,8 +29,6 @@ public class AccountService {
         user = userRepo.findById(userId).orElse(null);
         account.setUser(user);
 
-        account.setUser(user);
-
         AccountType accountType = accountTypeRepository.findById(typeId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid account type id: " + typeId));
         account.setAccounttype(accountType);
