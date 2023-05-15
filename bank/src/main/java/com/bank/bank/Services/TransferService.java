@@ -14,12 +14,11 @@ import com.bank.bank.Repositories.TransfersRepo;
 public class TransferService {
     @Autowired
     private AccountRepo accountRepository;
-    
 
     @Autowired
     private TransfersRepo transfersRepo;
 
-    public void SaveWithdraw(double amount, String date, TransactionType transactionType, Long SenderId,Long ReceiverId) {
+    public void SaveWithdraw(double amount, String date, Long SenderId, Long ReceiverId) {
         Account sender = accountRepository.findById(SenderId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid account  id: " + SenderId));
 
@@ -27,12 +26,12 @@ public class TransferService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid account  id: " + ReceiverId));
 
         Transfers transfers = new Transfers();
-        
+
         transfers.setSourceAccount(sender);
         transfers.setDestinationAccount(receiver);
         transfers.setAmount(amount);
         transfers.setDate(date);
-        transfers.setTransactionType(transactionType);
+
         transfersRepo.save(transfers);
 
         sender.setBalance(sender.getBalance() - amount);

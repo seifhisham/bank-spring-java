@@ -48,14 +48,14 @@ public class DynamicTransferController {
 
     @PostMapping("/Save-Transfer")
     public String saveAccount(@RequestParam("amount") double amount,
-                              @RequestParam("transactionType") Transaction.TransactionType transactionType,
-                              @RequestParam("date") String date,
-                              @RequestParam("SenderId") Long SenderId,
-                              @RequestParam("ReceiverId") Long ReceiverId) {
+
+            @RequestParam("date") String date,
+            @RequestParam("SenderId") Long SenderId,
+            @RequestParam("ReceiverId") Long ReceiverId) {
 
         Transfers transfers = new Transfers();
-        //transfers.setTransactionType(Transaction.TransactionType.TRANSFERS);
-        transferService.SaveWithdraw(amount,date,transactionType,SenderId,ReceiverId);
+        // transfers.setTransactionType(Transaction.TransactionType.TRANSFERS);
+        transferService.SaveWithdraw(amount, date, SenderId, ReceiverId);
         return "redirect:/thymeleaf/View-Transfer";
     }
 }

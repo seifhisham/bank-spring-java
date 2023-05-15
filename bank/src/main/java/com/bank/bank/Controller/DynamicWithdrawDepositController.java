@@ -1,4 +1,5 @@
 package com.bank.bank.Controller;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,8 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.bank.bank.Models.Transaction;
+
 import com.bank.bank.Models.Withdraw_Deposit;
+import com.bank.bank.Models.Transaction.TransactionType;
 import com.bank.bank.Repositories.AccountRepo;
 import com.bank.bank.Repositories.WithdrawRepo;
 import com.bank.bank.Services.WithdrawDepositService;
@@ -25,6 +27,8 @@ public class DynamicWithdrawDepositController {
 
     @Autowired
     private AccountRepo accountRepo;
+
+    Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
 
     @GetMapping("view-withdraw")
     public ModelAndView getListOfTransfers() {
@@ -49,12 +53,8 @@ public class DynamicWithdrawDepositController {
             @RequestParam("accountId") Long accountId,
             @RequestParam("amount") double amount,
             @RequestParam("type") Withdraw_Deposit.Type type,
-            @RequestParam("date") String date)
-
-            {
-                Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
-                withdraw_Deposit.setTransactionType(Transaction.TransactionType.WITHDRAW_DEPOSIT);
-
+            @RequestParam("date") String date) {
+        withdraw_Deposit.setTransactionType(TransactionType.WITHDRAW_DEPOSIT);
 
         withdrawDepositService.SaveWithdraw(amount, date, type, accountId);
 
