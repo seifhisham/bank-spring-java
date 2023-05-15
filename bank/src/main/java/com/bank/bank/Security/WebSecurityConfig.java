@@ -29,15 +29,16 @@ public class WebSecurityConfig {
 
         // Configuring the HTTP security
 
-        http.userDetailsService(userService) // Using the user service for user details
+        http.userDetailsService(userService)
 
                 .authorizeRequests()
 
-                 .antMatchers("/thymeleaf/View-User").hasAuthority("ADMIN") 
+                .antMatchers("/thymeleaf/View-User").hasAuthority("ADMIN")
 
                 // ADMIN authority
 
-                .antMatchers("/thymeleaf/add-post", "/thymeleaf/save-post").permitAll()
+                .antMatchers("/thymeleaf/add-post", "/thymeleaf/save-post", "/css/**")
+                .permitAll()
 
                 .anyRequest().authenticated() // All other requests require authentication
 
