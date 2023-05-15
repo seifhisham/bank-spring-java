@@ -1,40 +1,29 @@
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Withdraw/Deposit Form</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Save Withdraw</title>
 </head>
 
 <body>
-    <h1>Withdraw/Deposit Form</h1>
+    <h1>Save Withdraw</h1>
+    <form method="post" th:action="@{/thymeleaf/save-withdraw}">
+        <label for="accountType">Account ID:</label>
+        <input type="text" id="accountType" name="accountId" /><br />
 
-    <form action="#" th:action="@{/thymeleaf/save-withdraw}" th:object="${withdrawDeposit}" method="post">
-        <div>
-            <label for="accountId">Account ID:</label>
-            <input type="number" id="accountId" name="accountId" required />
-        </div>
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" /><br />
 
-        <div>
-            <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" required />
-        </div>
+        <label for="transactionType">Transaction Type:</label>
+        <select id="transactionType" name="transactionType">
+            <option value="WITHDRAW_DEPOSIT">Withdraw/Deposit</option>
+            <option value="TRANSFERS">Transfers</option>
+        </select><br />
 
-        <div>
-            <label for="transactionType">Transaction Type:</label>
-            <select id="transactionType" name="transactionType">
-                <option value="WITHDRAW">Withdraw</option>
-                <option value="DEPOSIT">Deposit</option>
-            </select>
-        </div>
+        <label for="date">Date:</label>
+        <input type="text" id="date" name="date" /><br />
 
-        <div>
-            <label for="date">Date:</label>
-            <input type="datetime-local" id="date" name="date" value="${#temporals.format(temporals.createNow(), 'yyyy-MM-dd\'T\'HH:mm')}" required />
-        </div>
-
-        <button type="submit">Submit</button>
+        <input type="submit" value="Save" />
     </form>
 </body>
 
