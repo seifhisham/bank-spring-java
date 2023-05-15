@@ -1,0 +1,28 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Withdraw/Deposit</title>
+</head>
+<body>
+    <h2>Add Withdraw/Deposit</h2>
+    <form th:action="@{/thymeleaf/save-withdraw}" method="post">
+        <label for="accountId">Account ID:</label>
+        <input type="text" id="accountId" name="accountId" required><br>
+
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" required><br>
+
+        <label for="type">Type:</label>
+        <select id="type" name="type" required>
+            <option value="WITHDRAW">Withdraw</option>
+            <option value="DEPOSIT">Deposit</option>
+        </select><br>
+
+        <label for="date">Date:</label>
+        <input type="text" id="date" name="date" required><br>
+
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
