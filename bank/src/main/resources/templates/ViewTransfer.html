@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Transfer Transactions</title>
+</head>
+<body>
+    <h1>Transfer Transactions</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Source Account</th>
+                <th>Destination Account</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="transfer : ${transfers}">
+                <td th:text="${transfer.id}"></td>
+                <td th:text="${transfer.amount}"></td>
+                <td th:text="${transfer.date}"></td>
+                <td th:text="${transfer.sourceAccount}"></td>
+                <td th:text="${transfer.destinationAccount}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
