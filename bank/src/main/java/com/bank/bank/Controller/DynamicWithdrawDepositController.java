@@ -54,9 +54,8 @@ public class DynamicWithdrawDepositController {
             @RequestParam("amount") double amount,
             @RequestParam("type") Withdraw_Deposit.Type type,
             @RequestParam("date") String date) {
-        withdraw_Deposit.setTransactionType(TransactionType.WITHDRAW_DEPOSIT);
 
-        withdrawDepositService.SaveWithdraw(amount, date, type, accountId);
+        withdrawDepositService.SaveWithdraw(amount, date, type, accountId, TransactionType.WITHDRAW_DEPOSIT);
 
         return "redirect:/thymeleaf/view-withdraw";
     }
