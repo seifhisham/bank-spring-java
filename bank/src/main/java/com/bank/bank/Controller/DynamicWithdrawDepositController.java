@@ -2,6 +2,8 @@ package com.bank.bank.Controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bank.bank.Models.User;
 import com.bank.bank.Models.Withdraw_Deposit;
 import com.bank.bank.Models.Transaction.TransactionType;
 import com.bank.bank.Repositories.AccountRepo;
@@ -35,6 +38,7 @@ public class DynamicWithdrawDepositController {
         ModelAndView mav = new ModelAndView("WithdrawDeposit.html");
         List<Withdraw_Deposit> ListOfTransfers = withdrawRepo.findAll();
         mav.addObject("transactions", ListOfTransfers);
+
         return mav;
     }
 
@@ -42,9 +46,10 @@ public class DynamicWithdrawDepositController {
     public ModelAndView getwithdrawDepositForm() {
         ModelAndView mav = new ModelAndView("AddWithdrawDeposit.html");
         Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
         mav.addObject("transactions", withdraw_Deposit);
-        mav.addObject("account", accountRepo.findAll());
+        mav.addObject("accountList", accountRepo.findAllByUser(user)); // Add account list as a model attribute
         return mav;
     }
 
