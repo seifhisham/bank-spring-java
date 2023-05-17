@@ -19,7 +19,9 @@ public class TransferService {
     @Autowired
     private TransfersRepo transfersRepo;
 
+
     public void SaveWithdraw(double amount, String date, Long SenderId, Long ReceiverId ,TransactionType transactionType) {
+
         Account sender = accountRepository.findById(SenderId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid account  id: " + SenderId));
 
@@ -33,6 +35,7 @@ public class TransferService {
         transfers.setAmount(amount);
         transfers.setDate(date);
         transfers.setTransactionType(transactionType.TRANSFERS);
+
         transfersRepo.save(transfers);
 
         sender.setBalance(sender.getBalance() - amount);
