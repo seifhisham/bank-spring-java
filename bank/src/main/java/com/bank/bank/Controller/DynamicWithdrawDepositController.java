@@ -34,13 +34,20 @@ public class DynamicWithdrawDepositController {
     Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
 
     @GetMapping("view-withdraw")
-    public ModelAndView getListOfTransfers() {
-        ModelAndView mav = new ModelAndView("WithdrawDeposit.html");
-        List<Withdraw_Deposit> ListOfTransfers = withdrawRepo.findAll();
-        mav.addObject("transactions", ListOfTransfers);
+public ModelAndView getListOfTransfers() {
+    ModelAndView mav = new ModelAndView("WithdrawDeposit.html");
 
-        return mav;
-    }
+    // Get the logged-in user
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    User user = (User) authentication.getPrincipal();
+
+    // Retrieve the list of transactions for the logged-in user
+    List<Withdraw_Deposit> listOfTransfers = withdrawRepo.findAllByRelatedAccountUser(user);
+
+    mav.addObject("transactions", listOfTransfers);
+    return mav;
+}
+
 
     @GetMapping("add-withdraw")
     public ModelAndView getwithdrawDepositForm() {
