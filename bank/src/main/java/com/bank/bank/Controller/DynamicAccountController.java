@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.bank.bank.Models.Account;
 import com.bank.bank.Models.User;
@@ -34,10 +36,18 @@ public class DynamicAccountController {
     @GetMapping("View-Account")
     public ModelAndView getAccountList() {
         ModelAndView mav = new ModelAndView("ViewAccount.html");
-        List<Account> accountList = accountRepo.findAll();
+    
+        // Get the logged-in user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+    
+        // Retrieve the list of accounts for the logged-in user
+        List<Account> accountList = accountRepo.findAllByUser(user);
+    
         mav.addObject("accounts", accountList);
         return mav;
     }
+    
 
     @GetMapping("add-account")
     public ModelAndView getAddAccountForm() {
