@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/css/viewuser.css">
+        <link rel="stylesheet" type="text/css" href="viewuser.css">
     </head>
 
     <body>
@@ -32,7 +32,7 @@
                         <td th:text="${user.name}"/>
                         <td th:text="${user.address}"/>
                         <td th:text="${user.phoneNumber}"/>
-                        <td th:text="${user.email}"/>
+                        <td th:text="${user.username}"/>
                         <td th:text="${user.password}"/>
                         <td>
                            <button type="submit"><a th:href="@{/thymeleaf/update-post(Id=${user.id})}"><b>Update</b></a></button>
