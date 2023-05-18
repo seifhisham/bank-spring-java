@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Transfer Transactions</title>
+    <link rel="stylesheet" type="text/css" href="/css/Trans.css">
 </head>
 <body>
     <h1>Transfer Transactions</h1>
@@ -19,8 +20,8 @@
                 <td th:text="${transfer.id}"></td>
                 <td th:text="${transfer.amount}"></td>
                 <td th:text="${transfer.date}"></td>
-                <td th:text="${transfer.sourceAccount}"></td>
-                <td th:text="${transfer.destinationAccount}"></td>
+                <td th:text="${transfer.sourceAccount.user.username}"></td>
+                <td th:text="${transfer.destinationAccount.user.username}"></td>
             </tr>
         </tbody>
     </table>
