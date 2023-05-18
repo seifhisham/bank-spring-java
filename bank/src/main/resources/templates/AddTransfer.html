@@ -1,7 +1,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <title>Save transfer</title>
 </head>
 
@@ -15,14 +14,11 @@
         <label for="accountType">Receiver ID:</label>
         <input type="text" id="ReceiverId" name="ReceiverId" /><br />
 
-
         <label for="amount">Amount:</label>
         <input type="text" id="amount" name="amount" /><br />
 
-
         <label for="date">Date:</label>
-        <input type="text" id="date" name="date" /><br />
-
+        <input type="text" id="date" name="date" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" readonly required /><br />
 
         <input type="submit" value="Save" />
     </form>
