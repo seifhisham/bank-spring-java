@@ -19,14 +19,19 @@ public class TransferService {
     @Autowired
     private TransfersRepo transfersRepo;
 
-
-    public void SaveWithdraw(double amount, String date, Long SenderId, Long ReceiverId ,TransactionType transactionType) {
+    public void SaveWithdraw(double amount, String date, Long SenderId, Long ReceiverId,
+            TransactionType transactionType) {
 
         Account sender = accountRepository.findById(SenderId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid account  id: " + SenderId));
 
         Account receiver = accountRepository.findById(ReceiverId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid account  id: " + ReceiverId));
+
+        if (sender.getBalance() < amount) {
+            throw new IllegalArgumentException(
+                    "Insufficient balance for transfer. Sender's account balance: " + sender.getBalance());
+        }
 
         Transfers transfers = new Transfers();
 
