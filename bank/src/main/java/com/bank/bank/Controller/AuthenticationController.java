@@ -51,13 +51,22 @@ public class AuthenticationController {
         return mav;
     }
 
-    @PostMapping("save-post")
 
+    @PostMapping("save-post")
     public String savePost(@ModelAttribute User user) {
 
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
 
         user.setRole("USER");
+
+        this.userRepo.save(user);
+
+        return "redirect:/thymeleaf/View-User";
+
+    }
+
+    @PostMapping("save-role")
+    public String saveRole(@ModelAttribute User user) {
 
         this.userRepo.save(user);
 
@@ -74,6 +83,14 @@ public class AuthenticationController {
     @GetMapping("update-post")
     public ModelAndView getUpdatePostForm(@RequestParam String Id) {
         ModelAndView mav = new ModelAndView("AddUser.html");
+        User olduser = this.userRepo.findById((String) Id).orElse(null);
+        mav.addObject("user", olduser);
+        return mav;
+    }
+
+    @GetMapping("update-role")
+    public ModelAndView getUpdaterole(@RequestParam String Id) {
+        ModelAndView mav = new ModelAndView("ChangeRole.html");
         User olduser = this.userRepo.findById((String) Id).orElse(null);
         mav.addObject("user", olduser);
         return mav;
