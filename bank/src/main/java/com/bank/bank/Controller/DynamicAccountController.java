@@ -60,25 +60,11 @@ public class DynamicAccountController {
         return mav;
     }
 
-    // @GetMapping("add-account")
-    // public ModelAndView getAddAccountForm(
-    // @RequestParam(value = "accountType", required = false) Long Type_ID,
-    // @RequestParam(value = "balance", required = false) double balance,
-    // @AuthenticationPrincipal User user) {
-    // ModelAndView mav = new ModelAndView("AddAccount.html");
-    // Account account = new Account();
-
-    // mav.addObject("account", account);
-    // mav.addObject("accountTypes", accountTypeRepo.findAll());
-    // mav.addObject("users", userRepo.findAll());
-    // return mav;
-    // }
-
     @PostMapping("/save-account")
     public String saveAccount(@RequestParam("accountType") Long typeId,
-            @RequestParam("balance") double balance, @AuthenticationPrincipal User user) {
+            @RequestParam("balance") double balance, @RequestParam("userId") String userId) {
 
-        accountService.saveAccount(typeId, balance, user.getId());
+        accountService.saveAccount(typeId, balance, userId);
         return "redirect:/thymeleaf/View-Account";
     }
 

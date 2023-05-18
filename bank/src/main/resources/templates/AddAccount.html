@@ -15,6 +15,15 @@
           <option th:each="accountType : ${accountTypes}" th:value="${accountType.id}" th:text="${accountType.title}">
           </option>
         </select>
+
+
+      <p>User ID:
+        <select name="userId" required>
+          <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.id}">
+          </option>
+        </select>
+      </p>
+
       </p>
       <p>Balance: <input type="number" name="balance" required></p>
       <button class="save-btn">Save</button>

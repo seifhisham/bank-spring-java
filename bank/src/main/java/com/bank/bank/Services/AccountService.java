@@ -20,22 +20,23 @@ public class AccountService {
 
     @Autowired
     private AccountTypeRepo accountTypeRepository;
+
     @Autowired
     private UserRepo userRepo;
 
     public void saveAccount(Long typeId, double balance, String userId) {
         Account account = new Account();
-        User user = new User();
-        user = userRepo.findById(userId).orElse(null);
+
+        User user = userRepo.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + userId));
         account.setUser(user);
 
         AccountType accountType = accountTypeRepository.findById(typeId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid account type id: " + typeId));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid account type ID: " + typeId));
         account.setAccounttype(accountType);
 
         account.setBalance(balance);
 
         accountRepository.save(account);
     }
-
 }
