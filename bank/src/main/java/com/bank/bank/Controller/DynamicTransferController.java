@@ -31,12 +31,20 @@ public class DynamicTransferController {
     private TransferService transferService;
 
     @GetMapping("View-Transfer")
-    public ModelAndView getAccountList() {
-        ModelAndView mav = new ModelAndView("ViewTransfer.html");
-        List<Transfers> translist = transfersRepo.findAll();
-        mav.addObject("transfers", translist);
-        return mav;
-    }
+public ModelAndView getAccountList() {
+    ModelAndView mav = new ModelAndView("ViewTransfer.html");
+
+    // Get the logged-in user
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    User user = (User) authentication.getPrincipal();
+
+    // Retrieve the transfers for the logged-in user
+    List<Transfers> transfersList = transfersRepo.findBySourceAccountUserOrDestinationAccountUser(user, user);
+
+    mav.addObject("transfers", transfersList);
+    return mav;
+}
+
 
     @GetMapping("Add-Transfer")
     public ModelAndView getAddAccountForm() {
