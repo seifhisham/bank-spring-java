@@ -68,6 +68,8 @@ public class AuthenticationController {
     @PostMapping("save-role")
     public String saveRole(@ModelAttribute User user) {
 
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+
         this.userRepo.save(user);
 
         return "redirect:/thymeleaf/View-User";
