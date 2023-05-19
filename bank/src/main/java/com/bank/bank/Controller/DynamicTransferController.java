@@ -31,20 +31,28 @@ public class DynamicTransferController {
     private TransferService transferService;
 
     @GetMapping("View-Transfer")
-public ModelAndView getAccountList() {
-    ModelAndView mav = new ModelAndView("ViewTransfer.html");
+    public ModelAndView getAccountList() {
+        ModelAndView mav = new ModelAndView("ViewTransfer.html");
 
-    // Get the logged-in user
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    User user = (User) authentication.getPrincipal();
+        // Get the logged-in user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
 
-    // Retrieve the transfers for the logged-in user
-    List<Transfers> transfersList = transfersRepo.findBySourceAccountUserOrDestinationAccountUser(user, user);
+        // Retrieve the transfers for the logged-in user
+        List<Transfers> transfersList = transfersRepo.findBySourceAccountUserOrDestinationAccountUser(user, user);
 
-    mav.addObject("transfers", transfersList);
-    return mav;
-}
+        mav.addObject("transfers", transfersList);
+        return mav;
+    }
 
+    @GetMapping("View-Transfer-id")
+    public ModelAndView getTransferListbyID() {
+        ModelAndView mav = new ModelAndView("ViewTransfer.html");
+        List<Transfers> transfersList = transfersRepo.findAll();
+        mav.addObject("transfers", transfersList);
+
+        return mav;
+    }
 
     @GetMapping("Add-Transfer")
     public ModelAndView getAddAccountForm() {
@@ -53,7 +61,7 @@ public ModelAndView getAccountList() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
-       
+
         mav.addObject("transfers", transfers);
         mav.addObject("sourceAccount", accountRepo.findAllByUser(user));
         mav.addObject("destinationAccount", accountRepo.findAll());
@@ -65,9 +73,10 @@ public ModelAndView getAccountList() {
             @RequestParam("amount") double amount,
             @RequestParam("accountId") Long accountId,
             @RequestParam("ReceiverId") Long ReceiverId) {
-            LocalDate date = LocalDate.now();
-        transferService.SaveWithdraw(amount,date.toString(), accountId, ReceiverId, Transaction.TransactionType.TRANSFERS);
+        LocalDate date = LocalDate.now();
+        transferService.SaveWithdraw(amount, date.toString(), accountId, ReceiverId,
+                Transaction.TransactionType.TRANSFERS);
 
-        return "redirect:/thymeleaf/View-Transfer";
+        return "redirect:/thymeleaf/View-Transfer-id";
     }
 }
