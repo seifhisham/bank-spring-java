@@ -24,7 +24,7 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
             setDefaultTargetUrl("/EmployeeHome.html");
         } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
             // Redirect to admin home page
-            setDefaultTargetUrl("/EmployeeHome.html");
+            setDefaultTargetUrl("/AdminDashboard.html");
         } else {
             // Redirect to customer home page
             setDefaultTargetUrl("/UserHome.html");
