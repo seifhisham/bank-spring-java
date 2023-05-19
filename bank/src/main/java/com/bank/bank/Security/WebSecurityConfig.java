@@ -29,6 +29,7 @@ public class WebSecurityConfig {
         http.userDetailsService(userService)
                 .authorizeRequests()
                 .antMatchers("/thymeleaf/View-User", "/thymeleaf/add-account").hasAuthority("ADMIN")
+                .antMatchers("/thymeleaf/add-account").hasAuthority("EMPLOYEE")
                 .antMatchers("/thymeleaf/add-post", "/thymeleaf/save-post", "/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

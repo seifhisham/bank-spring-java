@@ -33,21 +33,29 @@ public class DynamicAccountController {
     @Autowired
     private AccountService accountService;
 
-    @GetMapping("View-Account")
+    @GetMapping("View-Account-id")
     public ModelAndView getAccountList() {
         ModelAndView mav = new ModelAndView("ViewAccount.html");
-    
+
         // Get the logged-in user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
-    
+
         // Retrieve the list of accounts for the logged-in user
         List<Account> accountList = accountRepo.findAllByUser(user);
-    
+
         mav.addObject("accounts", accountList);
         return mav;
     }
-    
+
+    @GetMapping("View-Account")
+    public ModelAndView getAccountListById() {
+        ModelAndView mav = new ModelAndView("ViewAccount.html");
+        List<Account> accountList = accountRepo.findAll();
+        mav.addObject("accounts", accountList);
+
+        return mav;
+    }
 
     @GetMapping("add-account")
     public ModelAndView getAddAccountForm() {

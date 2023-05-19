@@ -20,7 +20,7 @@
 
       <p>User ID:
         <select name="userId" required>
-          <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.id}">
+          <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}">
           </option>
         </select>
       </p>
