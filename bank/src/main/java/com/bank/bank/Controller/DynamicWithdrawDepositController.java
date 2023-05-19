@@ -60,18 +60,17 @@ public class DynamicWithdrawDepositController {
 
     @GetMapping("add-withdraw")
     public ModelAndView getwithdrawDepositForm() {
-    ModelAndView mav = new ModelAndView("AddWithdrawDeposit.html");
-    Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    User user = (User) authentication.getPrincipal();
-    
-    withdraw_Deposit.setDate(LocalDate.now().toString()); // Set the current date
-    
-    mav.addObject("transactions", withdraw_Deposit);
-    mav.addObject("accountList", accountRepo.findAllByUser(user)); // Add account list as a model attribute
-    return mav;
-}
+        ModelAndView mav = new ModelAndView("AddWithdrawDeposit.html");
+        Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
 
+        withdraw_Deposit.setDate(LocalDate.now().toString()); // Set the current date
+
+        mav.addObject("transactions", withdraw_Deposit);
+        mav.addObject("accountList", accountRepo.findAllByUser(user)); // Add account list as a model attribute
+        return mav;
+    }
 
     @PostMapping("/save-withdraw")
     public String saveWithdraw(
@@ -82,7 +81,7 @@ public class DynamicWithdrawDepositController {
 
         withdrawDepositService.SaveWithdraw(amount, date, type, accountId, TransactionType.WITHDRAW_DEPOSIT);
 
-        return "redirect:/thymeleaf/view-withdraw";
+        return "redirect:/thymeleaf/view-withdraw-id";
     }
 
 }
