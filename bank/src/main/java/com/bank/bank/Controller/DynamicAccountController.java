@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.bank.bank.Models.Account;
 import com.bank.bank.Models.User;
@@ -34,10 +36,18 @@ public class DynamicAccountController {
     @GetMapping("View-Account")
     public ModelAndView getAccountList() {
         ModelAndView mav = new ModelAndView("ViewAccount.html");
-        List<Account> accountList = accountRepo.findAll();
+    
+        // Get the logged-in user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+    
+        // Retrieve the list of accounts for the logged-in user
+        List<Account> accountList = accountRepo.findAllByUser(user);
+    
         mav.addObject("accounts", accountList);
         return mav;
     }
+    
 
     @GetMapping("add-account")
     public ModelAndView getAddAccountForm() {
@@ -50,25 +60,11 @@ public class DynamicAccountController {
         return mav;
     }
 
-    // @GetMapping("add-account")
-    // public ModelAndView getAddAccountForm(
-    // @RequestParam(value = "accountType", required = false) Long Type_ID,
-    // @RequestParam(value = "balance", required = false) double balance,
-    // @AuthenticationPrincipal User user) {
-    // ModelAndView mav = new ModelAndView("AddAccount.html");
-    // Account account = new Account();
-
-    // mav.addObject("account", account);
-    // mav.addObject("accountTypes", accountTypeRepo.findAll());
-    // mav.addObject("users", userRepo.findAll());
-    // return mav;
-    // }
-
     @PostMapping("/save-account")
     public String saveAccount(@RequestParam("accountType") Long typeId,
-            @RequestParam("balance") double balance, @AuthenticationPrincipal User user) {
+            @RequestParam("balance") double balance, @RequestParam("userId") String userId) {
 
-        accountService.saveAccount(typeId, balance, user.getId());
+        accountService.saveAccount(typeId, balance, userId);
         return "redirect:/thymeleaf/View-Account";
     }
 

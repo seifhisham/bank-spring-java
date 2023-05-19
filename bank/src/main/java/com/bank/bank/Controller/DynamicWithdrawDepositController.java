@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import java.time.LocalDate;
 
 import com.bank.bank.Models.User;
 import com.bank.bank.Models.Withdraw_Deposit;
@@ -33,32 +34,44 @@ public class DynamicWithdrawDepositController {
 
     Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
 
+    @GetMapping("view-withdraw-id")
+    public ModelAndView getListOfTransfersbyid() {
+        ModelAndView mav = new ModelAndView("WithdrawDeposit.html");
+
+        // Get the logged-in user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+
+        // Retrieve the list of transactions for the logged-in user
+        List<Withdraw_Deposit> listOfTransfers = withdrawRepo.findAllByRelatedAccountUser(user);
+
+        mav.addObject("transactions", listOfTransfers);
+        return mav;
+    }
+
     @GetMapping("view-withdraw")
-public ModelAndView getListOfTransfers() {
-    ModelAndView mav = new ModelAndView("WithdrawDeposit.html");
+    public ModelAndView getListOfTransfers() {
+        ModelAndView mav = new ModelAndView("WithdrawDeposit.html");
+        List<Withdraw_Deposit> ListOfTransfers = withdrawRepo.findAll();
+        mav.addObject("transactions", ListOfTransfers);
 
-    // Get the logged-in user
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    User user = (User) authentication.getPrincipal();
-
-    // Retrieve the list of transactions for the logged-in user
-    List<Withdraw_Deposit> listOfTransfers = withdrawRepo.findAllByRelatedAccountUser(user);
-
-    mav.addObject("transactions", listOfTransfers);
-    return mav;
-}
-
+        return mav;
+    }
 
     @GetMapping("add-withdraw")
     public ModelAndView getwithdrawDepositForm() {
-        ModelAndView mav = new ModelAndView("AddWithdrawDeposit.html");
-        Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        mav.addObject("transactions", withdraw_Deposit);
-        mav.addObject("accountList", accountRepo.findAllByUser(user)); // Add account list as a model attribute
-        return mav;
-    }
+    ModelAndView mav = new ModelAndView("AddWithdrawDeposit.html");
+    Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    User user = (User) authentication.getPrincipal();
+    
+    withdraw_Deposit.setDate(LocalDate.now().toString()); // Set the current date
+    
+    mav.addObject("transactions", withdraw_Deposit);
+    mav.addObject("accountList", accountRepo.findAllByUser(user)); // Add account list as a model attribute
+    return mav;
+}
+
 
     @PostMapping("/save-withdraw")
     public String saveWithdraw(

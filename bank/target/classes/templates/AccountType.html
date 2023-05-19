@@ -26,11 +26,15 @@
                         <td th:text="${type.title}"/>
                         <td th:text="${type.interestRate}"/>
                         <td>
-                            <a th:href="@{/thymeleaf/update-accounttype(Id=${type.id})}">Edit</a>
+                            <a th:href="@{/thymeleaf/update-account-type(Id=${type.id})}">Edit</a>
                         </td>
                         <td>
-                            <a th:href="@{/thymeleaf/delete-accounttype(Id=${type.id})}">Delete</a>
+                            <a th:href="@{/thymeleaf/delete-account-type(Id=${type.id})}">Delete</a>
                         </td>
+                        <!-- <td>
+                            <button type="submit"><a th:href="@{/thymeleaf/update-post(Id=${user.id})}"><b>Update</b></a></button>
+                            <td><button type="submit"><a th:href="@{/thymeleaf/delete-post(Id=${user.id})}"><b>Delete</b></a></button></td>
+                         </td> -->
                     </tr>
                 </tbody>
             </table>

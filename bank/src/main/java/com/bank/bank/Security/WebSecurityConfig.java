@@ -15,58 +15,39 @@ import com.bank.bank.Services.UserService;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Autowired
     private UserService userService;
 
     @Bean
-
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-        // Configuring the HTTP security
-
-        http.userDetailsService(userService)
-
-                .authorizeRequests()
-
-                .antMatchers("/thymeleaf/View-User").hasAuthority("ADMIN")
-
-                // ADMIN authority
-
-                .antMatchers("/thymeleaf/add-post", "/thymeleaf/save-post", "/css/**")
-                .permitAll()
-
-                .anyRequest().authenticated() // All other requests require authentication
-
-                .and()
-
-                .formLogin() // Configuring form-based login
-
-                .loginPage("/thymeleaf/login") // Specifying the login page URL
-
-                .loginProcessingUrl("/thymeleaf/login/save") // Specifying the URL for processing the login form
-
-                .defaultSuccessUrl("/Home.html") // Specifying the default URL to redirect after successful
-
-                // login
-
-                .permitAll() // Allowing access to the login page for all users
-
-                .and()
-
-                .logout() // Configuring logout
-
-                .permitAll() // Allowing access to the logout URL for all users
-
-                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout")) // Specifying the logout URL
-
-                .logoutSuccessUrl("/thymeleaf/login"); // Specifying the URL to redirect after successful logout
-
-        return http.build(); // Building and returning the security filter chain
-
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.userDetailsService(userService)
+                .authorizeRequests()
+                .antMatchers("/thymeleaf/View-User", "/thymeleaf/add-account").hasAuthority("ADMIN")
+                .antMatchers("/thymeleaf/add-post", "/thymeleaf/save-post", "/css/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/thymeleaf/login")
+                .loginProcessingUrl("/thymeleaf/login/save")
+                .successHandler(successHandler()) // Custom success handler for different roles
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
+                .logoutSuccessUrl("/thymeleaf/login");
+        return http.build();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler successHandler() {
+        return new AuthenticationSuccessHandler();
+    }
+
 }

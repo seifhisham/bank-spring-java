@@ -24,12 +24,17 @@ public class WithdrawDepositService {
         Account account = accountRepository.findById(relatedAccountID)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid account ID: " + relatedAccountID));
 
+        if (type == Withdraw_Deposit.Type.WITHDRAW && account.getBalance() < amount) {
+            throw new IllegalArgumentException(
+                    "Insufficient balance for withdrawal. Account balance: " + account.getBalance());
+        }
+
         withdraw.setRelatedAccount(account);
         withdraw.setAmount(amount);
         withdraw.setDate(date);
         withdraw.setType(type);
         withdraw.setTransactionType(transactionType.WITHDRAW_DEPOSIT);
-        
+
         withdrawRepo.save(withdraw);
 
         if (type == Withdraw_Deposit.Type.WITHDRAW) {

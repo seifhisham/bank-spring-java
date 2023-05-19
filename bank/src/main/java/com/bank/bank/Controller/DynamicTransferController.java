@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import java.time.LocalDate;
 import com.bank.bank.Models.Transaction;
 import com.bank.bank.Models.Transfers;
 import com.bank.bank.Models.User;
@@ -31,12 +31,20 @@ public class DynamicTransferController {
     private TransferService transferService;
 
     @GetMapping("View-Transfer")
-    public ModelAndView getAccountList() {
-        ModelAndView mav = new ModelAndView("ViewTransfer.html");
-        List<Transfers> translist = transfersRepo.findAll();
-        mav.addObject("transfers", translist);
-        return mav;
-    }
+public ModelAndView getAccountList() {
+    ModelAndView mav = new ModelAndView("ViewTransfer.html");
+
+    // Get the logged-in user
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    User user = (User) authentication.getPrincipal();
+
+    // Retrieve the transfers for the logged-in user
+    List<Transfers> transfersList = transfersRepo.findBySourceAccountUserOrDestinationAccountUser(user, user);
+
+    mav.addObject("transfers", transfersList);
+    return mav;
+}
+
 
     @GetMapping("Add-Transfer")
     public ModelAndView getAddAccountForm() {
@@ -45,7 +53,7 @@ public class DynamicTransferController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
-
+       
         mav.addObject("transfers", transfers);
         mav.addObject("sourceAccount", accountRepo.findAllByUser(user));
         mav.addObject("destinationAccount", accountRepo.findAll());
@@ -55,11 +63,10 @@ public class DynamicTransferController {
     @PostMapping("/Save-Transfer")
     public String saveAccount(
             @RequestParam("amount") double amount,
-            @RequestParam("date") String date,
             @RequestParam("accountId") Long accountId,
             @RequestParam("ReceiverId") Long ReceiverId) {
-
-        transferService.SaveWithdraw(amount, date, accountId, ReceiverId, Transaction.TransactionType.TRANSFERS);
+            LocalDate date = LocalDate.now();
+        transferService.SaveWithdraw(amount,date.toString(), accountId, ReceiverId, Transaction.TransactionType.TRANSFERS);
 
         return "redirect:/thymeleaf/View-Transfer";
     }
