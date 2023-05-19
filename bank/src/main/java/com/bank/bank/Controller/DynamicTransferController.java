@@ -30,7 +30,7 @@ public class DynamicTransferController {
     @Autowired
     private TransferService transferService;
 
-    @GetMapping("View-Transfer")
+    @GetMapping("View-Transfer-id")
     public ModelAndView getAccountList() {
         ModelAndView mav = new ModelAndView("ViewTransfer.html");
 
@@ -45,7 +45,7 @@ public class DynamicTransferController {
         return mav;
     }
 
-    @GetMapping("View-Transfer-id")
+    @GetMapping("View-Transfer")
     public ModelAndView getTransferListbyID() {
         ModelAndView mav = new ModelAndView("ViewTransfer.html");
         List<Transfers> transfersList = transfersRepo.findAll();
