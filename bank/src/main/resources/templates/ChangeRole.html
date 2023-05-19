@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Add User</title>
+    <link rel="stylesheet" type="text/css" href="/css/adduser.css">
+    
+</head>
+
+<body>
+    <div>
+	<h1>Add User</h1>
+	<form th:action="@{/thymeleaf/save-role}" method="POST" th:object="${user}">
+
+		<label for="role">Name:</label>
+
+		<input type="text" id="role" name="role" th:field="*{role}" />
+
+		<input type="hidden" id="id" name="id" th:field="*{id}" />
+
+		<button type="submit">Save</button>
+
+	</form>
+
+	<a href="/thymeleaf/Authentication">Back to Authentication</a>
+</div>
+</body>
+
+</html>
