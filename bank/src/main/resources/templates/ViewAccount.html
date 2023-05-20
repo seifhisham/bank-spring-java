@@ -4,36 +4,42 @@
     <title>Account List</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/viewaccount.css">
 </head>
 
 <body>
+    <div>
     <h1>Account List</h1>
-    <table>
+    <table class="table table-hover table-bordered">
         <thead>
             <tr>
                 <th>Account ID</th>
                 <th>User ID</th>
                 <th>Account Type</th>
                 <th>Balance</th>
+                <th colspan="2"><b>Action</b></th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="account : ${accounts}">
-                <td th:text="${account.id}"></td>
-                <td th:text="${account.user.id}"></td>
-                <td th:text="${account.accounttype.id}"></td>
-                <td th:text="${account.balance}"></td>
+                <td th:text="${account.id}">
+                <td th:text="${account.user.id}">
+                <td th:text="${account.accounttype.id}">
+                <td th:text="${account.balance}">
 
                 <td>
-                    <a th:href="@{/thymeleaf/update-account(Id=${account.id})}">Edit</a>
-                </td>
-                <td>
-                    <a th:href="@{/thymeleaf/delete-account(Id=${account.id})}">Delete</a>
+                    <button type="submit"><a th:href="@{/thymeleaf/update-account(Id=${account.id})}"><b>Edit</b></a></button></a>
+                
+                    <td><button type="submit"><a th:href="@{/thymeleaf/delete-account(Id=${account.id})}"><b>Delete</b></a></button></td>
                 </td>
             </tr>
 
         </tbody>
     </table>
+    </div>
 </body>
 
 </html>
