@@ -116,7 +116,7 @@ public class AuthenticationController {
 
         SecurityContextHolder.getContext().setAuthentication(authenticated);
 
-        return "redirect:/thymeleaf/save-post";
+        return "redirect:/thymeleaf/Save-User";
     }
 
 }
