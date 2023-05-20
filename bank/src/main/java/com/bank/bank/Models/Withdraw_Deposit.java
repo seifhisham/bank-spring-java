@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 public class Withdraw_Deposit extends Transaction {
 
+
     @Enumerated(EnumType.STRING)
     private Type type;
     public enum Type {
