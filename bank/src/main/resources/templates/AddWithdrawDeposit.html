@@ -9,7 +9,9 @@
 
 <body>
     <h1>Add Withdraw/Deposit</h1>
-    <form th:action="@{/thymeleaf/save-withdraw}" method="post" onsubmit="handleSubmit()">
+
+    <form th:action="@{/thymeleaf/Save-Withdraw}" method="post" onsubmit="handleSubmit()">
+
         <label for="accountId">Account ID:</label>
         <select id="accountId" name="accountId" required>
             <option th:each="account : ${accountList}" th:value="${account.id}" th:text="${account.id}"></option>
@@ -17,6 +19,7 @@
         <label for="amount">Amount:</label>
         <input type="text" id="amount" name="amount" required><br>
         <br>
+
         <label for="type">Type:</label>
         <select id="type" name="type" required>
             <option value="">Select Type</option>
@@ -24,6 +27,7 @@
             <option value="DEPOSIT">Deposit</option>
         </select><br>
         <br>
+
         <label for="date">Date:</label>
 
         <input type="text" id="date" name="date" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" readonly
@@ -32,5 +36,4 @@
         <button type="submit">Save</button>
     </form>
 </body>
-
 </html>
