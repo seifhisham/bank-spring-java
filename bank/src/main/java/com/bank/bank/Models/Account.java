@@ -1,12 +1,10 @@
 package com.bank.bank.Models;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "accounts")
 @Inheritance(strategy = InheritanceType.JOINED)
-
 public class Account {
 
     @Id
@@ -17,9 +15,7 @@ public class Account {
     @JoinColumn(name = "user_id")
     private User user;
 
-  
-
-   @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Type_id")
     private AccountType accounttype;
 
@@ -87,13 +83,7 @@ public class Account {
         setBalance(balance);
         return this;
     }
-
-
-
-
-  
-  
-    }  
+}  
 
 
 
