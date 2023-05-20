@@ -1,7 +1,6 @@
 package com.bank.bank.Controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,9 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import com.bank.bank.Models.User;
 import com.bank.bank.Repositories.UserRepo;
 import com.bank.bank.Services.AuthService;
@@ -116,7 +113,6 @@ public class AuthenticationController {
 
         SecurityContextHolder.getContext().setAuthentication(authenticated);
 
-        return "redirect:/thymeleaf/save-post";
+        return "redirect:/thymeleaf/Save-User";
     }
-
 }

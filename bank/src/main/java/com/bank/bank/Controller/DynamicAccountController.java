@@ -1,9 +1,7 @@
 package com.bank.bank.Controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import com.bank.bank.Models.Account;
 import com.bank.bank.Models.User;
 import com.bank.bank.Repositories.AccountRepo;
@@ -88,7 +85,7 @@ public class DynamicAccountController {
     @GetMapping("Delete-Account")
     public String deletePost(@RequestParam("Id") Long Id) {
         this.accountRepo.deleteById(Id);
-        return "redirect:/thymeleaf/View-Account";
+        return "redirect:/thymeleaf/View-Account-Id";
     }
 
     @GetMapping("Update-Account")
@@ -102,5 +99,4 @@ public class DynamicAccountController {
         mav.addObject("account", account);
         return mav;
     }
-
 }

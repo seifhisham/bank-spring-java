@@ -1,43 +1,41 @@
 <html xmlns:th="http://www.thymleaf.org">
 
 
-    <head>
-        <title>List Posts</title>
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<head>
+    <title>List Posts</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/css/viewuser.css"> -->
-    </head>
+</head>
 
-    <body>
-        <div>
-            <h2>List Posts</h2>
-            <hr/>
-            <a th:href="@{/thymeleaf/View-User}">Create Post</a>
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th>title</th>
-                        <th>interestRate</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="type: ${accountTypes}">
-                        <td th:text="${type.title}"/>
-                        <td th:text="${type.interestRate}"/>
-                        <td>
-                            <a th:href="@{/thymeleaf/update-account-type(Id=${type.id})}">Edit</a>
-                        </td>
-                        <td>
-                            <a th:href="@{/thymeleaf/delete-account-type(Id=${type.id})}">Delete</a>
-                        </td>
-                        <!-- <td>
-                            <button type="submit"><a th:href="@{/thymeleaf/update-post(Id=${user.id})}"><b>Update</b></a></button>
-                            <td><button type="submit"><a th:href="@{/thymeleaf/delete-post(Id=${user.id})}"><b>Delete</b></a></button></td>
-                         </td> -->
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </body>
+<body>
+    <div>
+        <h2>List Posts</h2>
+        <hr />
+        <a th:href="@{/thymeleaf/View-User}">Create Post</a>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>title</th>
+                    <th>interestRate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="type: ${accountTypes}">
+                    <td th:text="${type.title}" />
+                    <td th:text="${type.interestRate}" />
+                    <td>
+                        <a th:href="@{/thymeleaf/Update-Account-Type(Id=${type.id})}">Edit</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/thymeleaf/Delete-Account-Type(Id=${type.id})}">Delete</a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
 </html>
