@@ -10,7 +10,7 @@
 <body>
   <h1>Add Account</h1>
   <div>
-    <form id="account-form" th:object="${account}" method="post" th:action="@{/thymeleaf/save-account}">
+    <form id="account-form" th:object="${account}" method="post" th:action="@{/thymeleaf/Save-Account}">
       <p>Account Type:
         <select name="accountType" required>
           <option th:each="accountType : ${accountTypes}" th:value="${accountType.id}" th:text="${accountType.title}">
