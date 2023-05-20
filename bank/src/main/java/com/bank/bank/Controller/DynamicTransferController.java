@@ -30,8 +30,8 @@ public class DynamicTransferController {
     @Autowired
     private TransferService transferService;
 
-    @GetMapping("View-Transfer-id")
-    public ModelAndView getAccountList() {
+    @GetMapping("View-Transfer-Id")
+    public ModelAndView GetTransferList() {
         ModelAndView mav = new ModelAndView("ViewTransfer.html");
 
         // Get the logged-in user
@@ -46,7 +46,7 @@ public class DynamicTransferController {
     }
 
     @GetMapping("View-Transfer")
-    public ModelAndView getTransferListbyID() {
+    public ModelAndView GetTransferListbyID() {
         ModelAndView mav = new ModelAndView("ViewTransfer.html");
         List<Transfers> transfersList = transfersRepo.findAll();
         mav.addObject("transfers", transfersList);
@@ -55,7 +55,7 @@ public class DynamicTransferController {
     }
 
     @GetMapping("Add-Transfer")
-    public ModelAndView getAddAccountForm() {
+    public ModelAndView GetAddTransferForm() {
         ModelAndView mav = new ModelAndView("AddTransfer.html");
         Transfers transfers = new Transfers();
 
@@ -69,7 +69,7 @@ public class DynamicTransferController {
     }
 
     @PostMapping("/Save-Transfer")
-    public String saveAccount(
+    public String saveTransfer(
             @RequestParam("amount") double amount,
             @RequestParam("accountId") Long accountId,
             @RequestParam("ReceiverId") Long ReceiverId) {
@@ -77,6 +77,6 @@ public class DynamicTransferController {
         transferService.SaveWithdraw(amount, date.toString(), accountId, ReceiverId,
                 Transaction.TransactionType.TRANSFERS);
 
-        return "redirect:/thymeleaf/View-Transfer-id";
+        return "redirect:/thymeleaf/View-Transfer-Id";
     }
 }
