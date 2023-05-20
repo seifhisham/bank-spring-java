@@ -3,18 +3,13 @@ package com.bank.bank.Models;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Optional;
-
 import javax.persistence.*;
-
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.Objects;
 
 // User entity
 @Entity
@@ -24,12 +19,10 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+
     protected String id;
-
     protected String name;
-
     protected String address;
-
     protected String phoneNumber;
 
     @Column(unique = true)
@@ -37,7 +30,6 @@ public class User implements UserDetails {
 
     @JsonIgnore
     private String password;
-
     private String role;
 
     public User() {
@@ -147,7 +139,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList(Arrays.asList(new SimpleGrantedAuthority(this.role)));
+        return new ArrayList<>(Arrays.asList(new SimpleGrantedAuthority(this.role)));
     }
 
     @Override
