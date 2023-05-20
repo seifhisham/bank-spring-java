@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bank.bank.Models.Account;
 import com.bank.bank.Models.AccountType;
-import com.bank.bank.Models.User;
+
 import com.bank.bank.Repositories.AccountTypeRepo;
 
 @Controller
@@ -23,7 +22,7 @@ public class DynamicAccountTypeController {
     @Autowired
     private AccountTypeRepo accountTypeRepo;
 
-    @GetMapping("View-accounttype")
+    @GetMapping("View-Account-Type")
     public ModelAndView getAccountList() {
         ModelAndView mav = new ModelAndView("AccountType.html");
 
@@ -32,7 +31,7 @@ public class DynamicAccountTypeController {
         return mav;
     }
 
-    @GetMapping("add-account-type")
+    @GetMapping("Add-Account-Type")
     public ModelAndView getAddPostForm() {
         ModelAndView mav = new ModelAndView("AddType.html");
         AccountType accountType = new AccountType();
@@ -40,22 +39,22 @@ public class DynamicAccountTypeController {
         return mav;
     }
 
-    @PostMapping("save-accounttype")
+    @PostMapping("Save-Account-Type")
     public String savePost(@ModelAttribute AccountType accountType) {
 
         this.accountTypeRepo.save(accountType);
 
-        return "redirect:/thymeleaf/View-accounttype";
+        return "redirect:/thymeleaf/View-Account-Type";
 
     }
 
-    @GetMapping("delete-account-type")
+    @GetMapping("Delete-Account-Type")
     public String deletePost(@RequestParam("Id") Long Id) {
         this.accountTypeRepo.deleteById(Id);
-        return "redirect:/thymeleaf/View-accounttype";
+        return "redirect:/thymeleaf/View-Account-Type";
     }
 
-    @GetMapping("update-account-type")
+    @GetMapping("Update-Account-Type")
     public ModelAndView getUpdatePostForm(@RequestParam("Id") Long Id) {
         ModelAndView mav = new ModelAndView("AddType.html");
         AccountType accountType = this.accountTypeRepo.findById(Id).orElse(null);
