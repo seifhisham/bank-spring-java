@@ -3,7 +3,7 @@ package com.bank.bank.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +33,7 @@ public class DynamicAccountController {
     @Autowired
     private AccountService accountService;
 
-    @GetMapping("View-Account-id")
+    @GetMapping("View-Account-Id")
     public ModelAndView getAccountList() {
         ModelAndView mav = new ModelAndView("ViewAccount.html");
 
@@ -57,7 +57,7 @@ public class DynamicAccountController {
         return mav;
     }
 
-    @GetMapping("add-account")
+    @GetMapping("Add-Account")
     public ModelAndView getAddAccountForm() {
         ModelAndView mav = new ModelAndView("AddAccount.html");
         Account account = new Account();
@@ -68,7 +68,7 @@ public class DynamicAccountController {
         return mav;
     }
 
-    @PostMapping("/save-account")
+    @PostMapping("/Save-Account")
     public String saveAccount(@RequestParam("accountType") Long typeId,
             @RequestParam("balance") double balance, @RequestParam("userId") String userId) {
 
@@ -78,20 +78,20 @@ public class DynamicAccountController {
 
     @PostMapping("/Save-Edit-Account")
     public String saveAccount(@RequestParam("accountId") Long accountId,
-            @RequestParam("accountType") Long typeId, 
+            @RequestParam("accountType") Long typeId,
             @RequestParam("balance") double balance,
             @RequestParam("userId") String userId) {
         accountService.SaveEditAccount(accountId, typeId, balance, userId);
         return "redirect:/thymeleaf/View-Account";
     }
 
-    @GetMapping("delete-account")
+    @GetMapping("Delete-Account")
     public String deletePost(@RequestParam("Id") Long Id) {
         this.accountRepo.deleteById(Id);
         return "redirect:/thymeleaf/View-Account";
     }
 
-    @GetMapping("update-account")
+    @GetMapping("Update-Account")
     public ModelAndView getUpdatePostForm(@RequestParam("Id") Long Id) {
         ModelAndView mav = new ModelAndView("EditAccount.html");
 
@@ -102,6 +102,5 @@ public class DynamicAccountController {
         mav.addObject("account", account);
         return mav;
     }
-
 
 }
