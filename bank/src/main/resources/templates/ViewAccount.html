@@ -12,33 +12,35 @@
 
 <body>
     <div>
-    <h1>Account List</h1>
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>Account ID</th>
-                <th>User ID</th>
-                <th>Account Type</th>
-                <th>Balance</th>
-                <th colspan="2"><b>Action</b></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="account : ${accounts}">
-                <td th:text="${account.id}">
-                <td th:text="${account.user.id}">
-                <td th:text="${account.accounttype.id}">
-                <td th:text="${account.balance}">
+        <h1>Account List</h1>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Account ID</th>
+                    <th>User ID</th>
+                    <th>Account Type</th>
+                    <th>Balance</th>
+                    <th colspan="2"><b>Action</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="account : ${accounts}">
+                    <td th:text="${account.id}">
+                    <td th:text="${account.user.id}">
+                    <td th:text="${account.accounttype.id}">
+                    <td th:text="${account.balance}">
 
-                <td>
-                    <button type="submit"><a th:href="@{/thymeleaf/update-account(Id=${account.id})}"><b>Edit</b></a></button></a>
-                
-                    <td><button type="submit"><a th:href="@{/thymeleaf/delete-account(Id=${account.id})}"><b>Delete</b></a></button></td>
-                </td>
-            </tr>
+                    <td>
+                        <button type="submit"><a
+                                th:href="@{/thymeleaf/Update-Account(Id=${account.id})}"><b>Edit</b></a></button></a>
 
-        </tbody>
-    </table>
+                    <td><button type="submit"><a
+                                th:href="@{/thymeleaf/Delete-Account(Id=${account.id})}"><b>Delete</b></a></button></td>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
     </div>
 </body>
 

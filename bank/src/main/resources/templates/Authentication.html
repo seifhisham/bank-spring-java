@@ -1,54 +1,58 @@
 <html xmlns:th="http://www.thymleaf.org">
 
 
-    <head>
-        <title>List of Accounts</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="viewuser.css">
-    </head>
+<head>
+    <title>List of Accounts</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="viewuser.css">
+</head>
 
-    <body>
-        <div>
-            <h2>List of Accounts</h2>
-            <hr/>
-            <button type="submit"><a th:href="@{/thymeleaf/add-account}"><b>Create Account</b></a></button>
-            <br><br>
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>name</th>
-                        <th>address</th>
-                        <th>phoneNumber</th>
-                        <th>email</th>
-                        <th>password</th>
-                        <th>Role</th>
-                        <th colspan="2"><b>Action</b></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="user: ${users}">
-                        <td th:text="${user.id}"/>
-                        <td th:text="${user.name}"/>
-                        <td th:text="${user.address}"/>
-                        <td th:text="${user.phoneNumber}"/>
-                        <td th:text="${user.username}"/>
-                        <td th:text="${user.password}"/>
-                        <td th:text="${user.Role}"/>
-                        <td>
-                            <button type="submit"><a th:href="@{/thymeleaf/update-role(Id=${user.id})}"><b>Change Role</b></a></button>
-                        </td>
-                        <td>    
-                           <button type="submit"><a th:href="@{/thymeleaf/update-post(Id=${user.id})}"><b>Update</b></a></button>
-                        </td>
-                        <td>
-                            <button type="submit"><a th:href="@{/thymeleaf/delete-post(Id=${user.id})}"><b>Delete</b></a></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </body>
+<body>
+    <div>
+        <h2>List of Accounts</h2>
+        <hr />
+        <button type="submit"><a th:href="@{/thymeleaf/add-account}"><b>Create Account</b></a></button>
+        <br><br>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>name</th>
+                    <th>address</th>
+                    <th>phoneNumber</th>
+                    <th>email</th>
+                    <th>password</th>
+                    <th>Role</th>
+                    <th colspan="2"><b>Action</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user: ${users}">
+                    <td th:text="${user.id}" />
+                    <td th:text="${user.name}" />
+                    <td th:text="${user.address}" />
+                    <td th:text="${user.phoneNumber}" />
+                    <td th:text="${user.username}" />
+                    <td th:text="${user.password}" />
+                    <td th:text="${user.Role}" />
+                    <td>
+                        <button type="submit"><a th:href="@{/thymeleaf/Update-Role(Id=${user.id})}"><b>Change
+                                    Role</b></a></button>
+                    </td>
+                    <td>
+                        <button type="submit"><a
+                                th:href="@{/thymeleaf/Update-User(Id=${user.id})}"><b>Update</b></a></button>
+                    </td>
+                    <td>
+                        <button type="submit"><a
+                                th:href="@{/thymeleaf/Delete-User(Id=${user.id})}"><b>Delete</b></a></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
 </html>

@@ -88,7 +88,7 @@ public class DynamicAccountController {
     @GetMapping("Delete-Account")
     public String deletePost(@RequestParam("Id") Long Id) {
         this.accountRepo.deleteById(Id);
-        return "redirect:/thymeleaf/View-Account";
+        return "redirect:/thymeleaf/View-Account-Id";
     }
 
     @GetMapping("Update-Account")
