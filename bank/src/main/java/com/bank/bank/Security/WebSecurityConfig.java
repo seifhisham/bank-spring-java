@@ -28,8 +28,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.userDetailsService(userService)
                 .authorizeRequests()
-                .antMatchers("/thymeleaf/View-User", "/thymeleaf/add-account").hasAuthority("ADMIN")
-                .antMatchers("/thymeleaf/add-account").hasAuthority("EMPLOYEE")
+                .antMatchers("/thymeleaf/View-User", "/thymeleaf/Add-Account").hasAuthority("ADMIN")
+                .antMatchers("/thymeleaf/Add-Account").hasAuthority("EMPLOYEE")
                 .antMatchers("/thymeleaf/Add-User", "/thymeleaf/Save-User", "/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
