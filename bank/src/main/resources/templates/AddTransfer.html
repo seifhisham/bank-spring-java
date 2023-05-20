@@ -1,29 +1,35 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Save transfer</title>
-    <link rel="stylesheet" type="text/css" href="/css/withdraw.css">
+  <meta charset="UTF-8">
+  <title>Add Account</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/addaccount.css">
 </head>
 
 <body>
-    <h1>Save transfer</h1>
-    <form method="post" th:action="@{/thymeleaf/Save-Transfer}">
-        <label for="accountId">Account ID:</label>
-        <select id="accountId" name="accountId" required>
-            <option th:each="account : ${sourceAccount}" th:value="${account.id}" th:text="${account.id}"></option>
-        </select><br>
-        <label for="accountType">Receiver ID:</label>
-        <input type="text" id="ReceiverId" name="ReceiverId" /><br />
+    <div>
+  <h1>Add Account</h1>
 
-        <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount" /><br />
+    <form id="account-form" th:object="${account}" method="post" th:action="@{/thymeleaf/save-account}">
+      <p>Account Type:
+        <select name="accountType" required>
+          <option th:each="accountType : ${accountTypes}" th:value="${accountType.id}" th:text="${accountType.title}">
+          </option>
+        </select>
 
-        <label for="date">Date:</label>
-        <input type="text" id="date" name="date" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" readonly
-            required /><br />
 
-        <input type="submit" value="Save" />
+      <p>User ID:
+        <select name="userId" required>
+          <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}">
+          </option>
+        </select>
+      </p>
+
+      </p>
+      <p>Balance: <input type="number" name="balance" required></p>
+      <button class="save-btn">Save</button>
     </form>
+  </div>
 </body>
 
-</html>
