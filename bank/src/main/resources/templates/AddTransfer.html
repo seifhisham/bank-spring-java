@@ -2,16 +2,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Add Account</title>
+  <title>Add Transfer</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" type="text/css" href="/css/addaccount.css">
 </head>
 
 <body>
     <div>
-  <h1>Add Account</h1>
+  <h1>Add Transfer</h1>
 
-    <form id="account-form" th:object="${account}" method="post" th:action="@{/thymeleaf/save-account}">
+    <form id="account-form" th:object="${account}" method="post" th:action="@{/thymeleaf/Save-Account}">
       <p>Account Type:
         <select name="accountType" required>
           <option th:each="accountType : ${accountTypes}" th:value="${accountType.id}" th:text="${accountType.title}">
