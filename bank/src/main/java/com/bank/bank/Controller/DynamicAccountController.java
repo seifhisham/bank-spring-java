@@ -76,6 +76,15 @@ public class DynamicAccountController {
         return "redirect:/thymeleaf/View-Account";
     }
 
+    @PostMapping("/Save-Edit-Account")
+    public String saveAccount(@RequestParam("accountId") Long accountId,
+            @RequestParam("accountType") Long typeId, 
+            @RequestParam("balance") double balance,
+            @RequestParam("userId") String userId) {
+        accountService.SaveEditAccount(accountId, typeId, balance, userId);
+        return "redirect:/thymeleaf/View-Account";
+    }
+
     @GetMapping("delete-account")
     public String deletePost(@RequestParam("Id") Long Id) {
         this.accountRepo.deleteById(Id);
@@ -84,14 +93,15 @@ public class DynamicAccountController {
 
     @GetMapping("update-account")
     public ModelAndView getUpdatePostForm(@RequestParam("Id") Long Id) {
-        ModelAndView mav = new ModelAndView("Addaccount.html");
+        ModelAndView mav = new ModelAndView("EditAccount.html");
 
         mav.addObject("accountTypes", accountTypeRepo.findAll());
         mav.addObject("users", userRepo.findAll());
         Account account = this.accountRepo.findById(Id).orElse(null);
 
-        mav.addObject("accounts", account);
+        mav.addObject("account", account);
         return mav;
     }
+
 
 }
