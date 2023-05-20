@@ -34,9 +34,9 @@ public class DynamicWithdrawDepositController {
 
     Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
 
-    @GetMapping("view-withdraw-id")
-    public ModelAndView getListOfTransfersbyid() {
-        ModelAndView mav = new ModelAndView("WithdrawDeposit.html");
+    @GetMapping("View-Withdraw-Id")
+    public ModelAndView GetListOfWithrawbyId() {
+        ModelAndView mav = new ModelAndView("ViewWithdrawDeposit.html");
 
         // Get the logged-in user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -49,16 +49,16 @@ public class DynamicWithdrawDepositController {
         return mav;
     }
 
-    @GetMapping("view-withdraw")
-    public ModelAndView getListOfTransfers() {
-        ModelAndView mav = new ModelAndView("WithdrawDeposit.html");
+    @GetMapping("View-Withdraw")
+    public ModelAndView GetListOfWithdraw() {
+        ModelAndView mav = new ModelAndView("ViewWithdrawDeposit.html");
         List<Withdraw_Deposit> ListOfTransfers = withdrawRepo.findAll();
         mav.addObject("transactions", ListOfTransfers);
 
         return mav;
     }
 
-    @GetMapping("add-withdraw")
+    @GetMapping("Add-Withdraw")
     public ModelAndView getwithdrawDepositForm() {
         ModelAndView mav = new ModelAndView("AddWithdrawDeposit.html");
         Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
@@ -72,7 +72,7 @@ public class DynamicWithdrawDepositController {
         return mav;
     }
 
-    @PostMapping("/save-withdraw")
+    @PostMapping("/Save-Withdraw")
     public String saveWithdraw(
             @RequestParam("accountId") Long accountId,
             @RequestParam("amount") double amount,
@@ -81,7 +81,7 @@ public class DynamicWithdrawDepositController {
 
         withdrawDepositService.SaveWithdraw(amount, date, type, accountId, TransactionType.WITHDRAW_DEPOSIT);
 
-        return "redirect:/thymeleaf/view-withdraw-id";
+        return "redirect:/thymeleaf/View-Withdraw-Id";
     }
 
 }
