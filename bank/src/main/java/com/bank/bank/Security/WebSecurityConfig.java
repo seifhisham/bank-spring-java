@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -30,7 +30,7 @@ public class WebSecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/thymeleaf/View-User", "/thymeleaf/add-account").hasAuthority("ADMIN")
                 .antMatchers("/thymeleaf/add-account").hasAuthority("EMPLOYEE")
-                .antMatchers("/thymeleaf/add-post", "/thymeleaf/save-post", "/css/**").permitAll()
+                .antMatchers("/thymeleaf/Add-User", "/thymeleaf/Save-User", "/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
