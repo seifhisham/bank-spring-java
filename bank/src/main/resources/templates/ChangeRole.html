@@ -2,62 +2,62 @@
 
 <head>
 	<title>Update Role</title>
-    <link rel="stylesheet" type="text/css" href="/css/adduser.css">
-    
+	<link rel="stylesheet" type="text/css" href="/css/adduser.css">
+
 </head>
 
 <body>
-    <div>
-	<h1>Update Role</h1>
+	<div>
+		<h1>Update Role</h1>
 
-	<form th:action="@{/thymeleaf/save-role}" method="POST" th:object="${user}">
-
-
-		<label for="username">Username:</label>
-
-		<input type="username" id="username" name="username" th:field="*{username}" />
+		<form th:action="@{/thymeleaf/Save-Role}" method="POST" th:object="${user}">
 
 
+			<label for="username">Username:</label>
 
-		<label for="password">Password:</label>
-
-		<input type="password" id="password" name="password" th:field="*{password}" />
-
-
-		<label for="name">Name:</label>
-
-		<input type="text" id="name" name="name" th:field="*{name}" />
+			<input type="username" id="username" name="username" th:field="*{username}" />
 
 
 
-		<label for="address">Address:</label>
+			<label for="password">Password:</label>
 
-		<input type="text" id="address" name="address" th:field="*{address}" />
-
-
-
-		<label for="phoneNumber">Phone Number:</label>
-
-		<input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" />
+			<input type="password" id="password" name="password" th:field="*{password}" />
 
 
+			<label for="name">Name:</label>
 
-		<label for="role">Role:</label>
-
-		<input type="text" id="role" name="role" th:field="*{role}" />
+			<input type="text" id="name" name="name" th:field="*{name}" />
 
 
 
-		<input type="hidden" id="id" name="id" th:field="*{id}" />
+			<label for="address">Address:</label>
+
+			<input type="text" id="address" name="address" th:field="*{address}" />
 
 
 
-		<button type="submit">Update</button>
+			<label for="phoneNumber">Phone Number:</label>
 
-	</form>
+			<input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" />
 
-	<button type="submit"><a th:href="@{/thymeleaf/Authentication}"><b>View Accounts</b></a></button>
-</div>
+
+
+			<label for="role">Role:</label>
+
+			<input type="text" id="role" name="role" th:field="*{role}" />
+
+
+
+			<input type="hidden" id="id" name="id" th:field="*{id}" />
+
+
+
+			<button type="submit">Update</button>
+
+		</form>
+
+		<button type="submit"><a th:href="@{/thymeleaf/Authentication}"><b>View Accounts</b></a></button>
+	</div>
 </body>
 
 </html>

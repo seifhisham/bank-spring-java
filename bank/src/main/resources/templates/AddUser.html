@@ -2,55 +2,55 @@
 
 <head>
 	<title>Add User</title>
-    <link rel="stylesheet" type="text/css" href="/css/adduser.css">
-    
+	<link rel="stylesheet" type="text/css" href="/css/adduser.css">
+
 </head>
 
 <body>
-    <div>
-	<h1>Add User</h1>
-	<form th:action="@{/thymeleaf/save-post}" method="POST" th:object="${user}">
+	<div>
+		<h1>Add User</h1>
+		<form th:action="@{/thymeleaf/Save-User}" method="POST" th:object="${user}">
 
-		<label for="name">Name:</label>
+			<label for="name">Name:</label>
 
-		<input type="text" id="name" name="name" th:field="*{name}" />
-
-
-
-		<label for="password">Password:</label>
-
-		<input type="password" id="password" name="password" th:field="*{password}" />
+			<input type="text" id="name" name="name" th:field="*{name}" />
 
 
 
-		<label for="address">Address:</label>
+			<label for="password">Password:</label>
 
-		<input type="text" id="address" name="address" th:field="*{address}" />
-
-
-
-		<label for="phoneNumber">Phone Number:</label>
-
-		<input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" />
+			<input type="password" id="password" name="password" th:field="*{password}" />
 
 
 
-		<label for="username">Username:</label>
+			<label for="address">Address:</label>
 
-		<input type="username" id="username" name="username" th:field="*{username}" />
-
-
-
-		<input type="hidden" id="id" name="id" th:field="*{id}" />
+			<input type="text" id="address" name="address" th:field="*{address}" />
 
 
 
-		<button type="submit">Save</button>
+			<label for="phoneNumber">Phone Number:</label>
 
-	</form>
+			<input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" />
 
-	<a href="/thymeleaf/Authentication">Back to Authentication</a>
-</div>
+
+
+			<label for="username">Username:</label>
+
+			<input type="username" id="username" name="username" th:field="*{username}" />
+
+
+
+			<input type="hidden" id="id" name="id" th:field="*{id}" />
+
+
+
+			<button type="submit">Save</button>
+
+		</form>
+
+		<a href="/thymeleaf/Authentication">Back to Authentication</a>
+	</div>
 </body>
 
 </html>

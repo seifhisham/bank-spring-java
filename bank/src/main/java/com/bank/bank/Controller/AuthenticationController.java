@@ -2,7 +2,6 @@ package com.bank.bank.Controller;
 
 import java.util.List;
 
-import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.bank.bank.Models.User;
@@ -43,7 +41,7 @@ public class AuthenticationController {
         return mav;
     }
 
-    @GetMapping("add-post")
+    @GetMapping("Add-User")
     public ModelAndView getAddPostForm() {
         ModelAndView mav = new ModelAndView("AddUser.html");
         User user = new User();
@@ -51,8 +49,7 @@ public class AuthenticationController {
         return mav;
     }
 
-
-    @PostMapping("save-post")
+    @PostMapping("Save-User")
     public String savePost(@ModelAttribute User user) {
 
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
@@ -65,7 +62,7 @@ public class AuthenticationController {
 
     }
 
-    @PostMapping("save-role")
+    @PostMapping("Save-Role")
     public String saveRole(@ModelAttribute User user) {
 
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
@@ -76,13 +73,13 @@ public class AuthenticationController {
 
     }
 
-    @GetMapping("delete-post")
+    @GetMapping("Delete-User")
     public String deletePost(@RequestParam("Id") String id) {
         this.userRepo.deleteById(id);
         return "redirect:/thymeleaf/View-User";
     }
 
-    @GetMapping("update-post")
+    @GetMapping("Update-User")
     public ModelAndView getUpdatePostForm(@RequestParam String Id) {
         ModelAndView mav = new ModelAndView("AddUser.html");
         User olduser = this.userRepo.findById((String) Id).orElse(null);
@@ -90,7 +87,7 @@ public class AuthenticationController {
         return mav;
     }
 
-    @GetMapping("update-role")
+    @GetMapping("Update-Role")
     public ModelAndView getUpdaterole(@RequestParam String Id) {
         ModelAndView mav = new ModelAndView("ChangeRole.html");
         User olduser = this.userRepo.findById((String) Id).orElse(null);
