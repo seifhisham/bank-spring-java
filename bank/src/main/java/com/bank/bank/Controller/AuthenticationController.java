@@ -118,5 +118,4 @@ public class AuthenticationController {
 
         return "redirect:/thymeleaf/Save-User";
     }
-
 }
