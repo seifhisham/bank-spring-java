@@ -39,4 +39,22 @@ public class AccountService {
 
         accountRepository.save(account);
     }
+
+    public void SaveEditAccount(Long accountId, Long typeId, double balance, String userId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid account ID: " + accountId));
+    
+        User user = userRepo.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + userId));
+        account.setUser(user);
+    
+        AccountType accountType = accountTypeRepository.findById(typeId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid account type ID: " + typeId));
+        account.setAccounttype(accountType);
+    
+        account.setBalance(balance);
+    
+        accountRepository.save(account);
+    }
+    
 }
