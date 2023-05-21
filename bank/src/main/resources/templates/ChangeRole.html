@@ -42,9 +42,11 @@
 
 
 
-			<label for="role">Role:</label>
-
-			<input type="text" id="role" name="role" th:field="*{role}" />
+			<select id="role" name="role" th:field="*{role}">
+				<option value="ADMIN">ADMIN</option>
+				<option value="EMPLOYEE">EMPLOYEE</option>
+				<option value="USER">USER</option>
+			</select>
 
 
 
