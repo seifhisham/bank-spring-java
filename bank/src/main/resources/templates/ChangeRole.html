@@ -13,15 +13,15 @@
 		<form th:action="@{/thymeleaf/Save-Role}" method="POST" th:object="${user}">
 
 
-			<label for="username">Username:</label>
+			<label for="username">Email:</label>
 
-			<input type="username" id="username" name="username" th:field="*{username}" />
+			<input type="email" id="username" name="username" th:field="*{username}" required/>
 
 
 
 			<label for="password">Password:</label>
 
-			<input type="password" id="password" name="password" th:field="*{password}" />
+			<input type="password" id="password" name="password" th:field="*{password}" required/>
 
 
 			<label for="name">Name:</label>
