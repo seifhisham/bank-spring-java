@@ -8,27 +8,27 @@
 </head>
 
 <body>
-    <h1>Edit Account</h1>
-    <div>
-      <form id="account-form" th:object="${account}" method="post" th:action="@{/thymeleaf/Save-Edit-Account}">
-        <input type="hidden" name="accountId" th:value="${account.id}">
-        
-        <p>Account Type:
-          <select name="accountType" required>
-            <option th:each="accountType : ${accountTypes}" th:value="${accountType.id}" th:text="${accountType.title}">
-            </option>
-          </select>
-        </p>
-  
-        <p>User ID:
-          <select name="userId" required>
-            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.id}">
-            </option>
-          </select>
-        </p>
-  
-        <p>Balance: <input type="number" name="balance" required></p>
-        <button class="save-btn">Save</button>
-      </form>
-    </div>
-  </body>
+  <h1>Edit Account</h1>
+  <div>
+    <form id="account-form" th:object="${account}" method="post" th:action="@{/thymeleaf/Save-Edit-Account}">
+      <input type="hidden" name="accountId" th:value="${account.id}">
+
+      <p>Account Type:
+        <select name="accountType" required>
+          <option th:each="accountType : ${accountTypes}" th:value="${accountType.id}" th:text="${accountType.title}">
+          </option>
+        </select>
+      </p>
+
+      <p>User ID:
+        <select name="userId" required>
+          <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}">
+          </option>
+        </select>
+      </p>
+
+      <p>Balance: <input type="number" name="balance" required></p>
+      <button class="save-btn">Save</button>
+    </form>
+  </div>
+</body>
