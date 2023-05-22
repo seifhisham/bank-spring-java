@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Loan Form</title>
+    <link rel="stylesheet" type="text/css" href="/css/withdraw.css">
+</head>
+
+<body>
+    <h1>Loan Application Form</h1>
+
+    <form th:action="@{/thymeleaf/Save-Loan}" th:object="${Loans}" method="post" onsubmit="handleSubmit()">
+
+        <div>
+            <label for="accountId">Account ID:</label>
+            <select id="accountId" name="accountId" required>
+                <option th:each="account : ${accountList}" th:value="${account.id}" th:text="${account.id}"></option>
+            </select><br>
+        </div>
+
+        <div>
+            <label for="amount">Loan Amount:</label>
+            <input type="text" id="amount" th:field="*{amount}" />
+        </div>
+
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+
+    </form>
+</body>
+
+</html>
