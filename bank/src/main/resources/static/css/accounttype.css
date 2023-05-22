@@ -44,20 +44,21 @@ body {
   table td {
     padding: 10px;
     border: 1px solid #1858a8;
-    background-color: #1858a8;
+    background-color: #ffffff;
   }
   
   table th {
-    background-color: #1858a8;
+    background-color: #ffffff;
     font-weight: bold;
     text-align: left;
+    color: #000000;
   }
   
   table td a {
     display: inline-block;
     padding: 5px 10px;
     background-color: #1858a8;
-    color: #fff;
+    color: #000000;
     text-decoration: none;
     border-radius: 4px;
   }
