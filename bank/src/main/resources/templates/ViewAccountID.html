@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Account List</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/viewaccount.css">
+</head>
+
+<body>
+    <div>
+        <h1>Account List</h1>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Account ID</th>
+                    <th>Username</th>
+                    <th>Account Type</th>
+                    <th>Balance</th>
+                    <th colspan="2"><b>Action</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="account : ${accounts}">
+                    <td th:text="${account.id}">
+                    <td th:value="${account.user.id}" th:text="${account.user.username}">
+                    <td th:value="${account.accounttype.id}" th:text="${account.accounttype.title}">
+                    <td th:text="${account.balance}">
+     
+                        <td>
+                            <button type="submit">
+                                <a th:href="@{/thymeleaf/Delete-Account-ID(Id=${account.id})}"><b>Delete</b></a>
+                            </button>
+                        </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
