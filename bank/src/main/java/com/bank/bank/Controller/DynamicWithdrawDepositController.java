@@ -1,7 +1,9 @@
 package com.bank.bank.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -31,10 +33,8 @@ public class DynamicWithdrawDepositController {
     @Autowired
     private AccountRepo accountRepo;
 
-    Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
-
     @GetMapping("View-Withdraw-Id")
-    public ModelAndView GetListOfWithrawbyId() {
+    public ModelAndView getListOfWithdrawById() {
         ModelAndView mav = new ModelAndView("ViewWithdrawDeposit.html");
 
         // Get the logged-in user
@@ -49,16 +49,16 @@ public class DynamicWithdrawDepositController {
     }
 
     @GetMapping("View-Withdraw")
-    public ModelAndView GetListOfWithdraw() {
+    public ModelAndView getListOfWithdraw() {
         ModelAndView mav = new ModelAndView("ViewWithdrawDeposit.html");
-        List<Withdraw_Deposit> ListOfTransfers = withdrawRepo.findAll();
-        mav.addObject("transactions", ListOfTransfers);
+        List<Withdraw_Deposit> listOfTransfers = withdrawRepo.findAll();
+        mav.addObject("transactions", listOfTransfers);
 
         return mav;
     }
 
     @GetMapping("Add-Withdraw")
-    public ModelAndView getwithdrawDepositForm() {
+    public ModelAndView getWithdrawDepositForm() {
         ModelAndView mav = new ModelAndView("AddWithdrawDeposit.html");
         Withdraw_Deposit withdraw_Deposit = new Withdraw_Deposit();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -72,15 +72,14 @@ public class DynamicWithdrawDepositController {
     }
 
     @PostMapping("/Save-Withdraw")
-    public String saveWithdraw(
+    public ResponseEntity<Void> saveWithdraw(
             @RequestParam("accountId") Long accountId,
             @RequestParam("amount") double amount,
             @RequestParam("type") Withdraw_Deposit.Type type,
-            @RequestParam("date") String date) {
-
+            @RequestParam("date") String date) throws Throwable {
         withdrawDepositService.SaveWithdraw(amount, date, type, accountId, TransactionType.WITHDRAW_DEPOSIT);
-
-        return "redirect:/thymeleaf/View-Withdraw-Id";
+        return ResponseEntity.ok().build();
     }
-
+    
 }
+
