@@ -10,14 +10,12 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @Aspect
 @Component
-@ControllerAdvice
 public class ExceptionHandlingAspect {
 
-    @Pointcut("within(com.bank.bank.Controller.*)") 
+    @Pointcut("within(com.bank.bank.Controller.*)")
     void controllerMethods() {
     }
 
@@ -27,7 +25,7 @@ public class ExceptionHandlingAspect {
             return joinPoint.proceed();
         } catch (Throwable e) {
             Map<String, Integer> res = new HashMap<>();
-            res.put("el 3omda top shghlha elhamdullah", 404);
+            res.put("Your balance is insufficient for this withdrawal.", 404);
             return new ResponseEntity<>(res, HttpStatus.NOT_FOUND);
         }
     }
