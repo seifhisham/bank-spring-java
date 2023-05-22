@@ -2,37 +2,37 @@
 
 
 <head>
-    <title>List Posts</title>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/css/viewuser.css"> -->
-        <link rel="stylesheet" type="text/css" href="/css/accounttype.css">
+    <title>List of Account Types</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>        
+    <link rel="stylesheet" type="text/css" href="/css/accounttype.css">
 </head>
 
 <body>
     <div>
-        <h2>List Posts</h2>
+        <h2>List of Account Types</h2>
         <hr />
-        <a th:href="@{/thymeleaf/View-User}">Create Post</a>
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
                     <th>Title</th>
                     <th>Interest Rate</th>
+                    <th colspan="2"><b>Action</b></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="type: ${accountTypes}">
-                    <td th:text="${type.title}" />
-                    <td th:text="${type.interestRate}" />
+                    <td th:text="${type.title}">
+                    <td th:text="${type.interestRate}">
                     <td>
-                        <a th:href="@{/thymeleaf/Update-Account-Type(Id=${type.id})}">Edit</a>
+                        <button type="submit">
+                        <a th:href="@{/thymeleaf/Update-Account-Type(Id=${type.id})}"><b>Edit</b></a></button>
                     </td>
                     <td>
-                        <a th:href="@{/thymeleaf/Delete-Account-Type(Id=${type.id})}">Delete</a>
+                        <button type="submit">
+                        <a th:href="@{/thymeleaf/Delete-Account-Type(Id=${type.id})}"><b>Delete</b></a></button>
                     </td>
-
                 </tr>
             </tbody>
         </table>

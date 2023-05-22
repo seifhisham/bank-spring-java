@@ -59,19 +59,22 @@ button[type="submit"]:hover {
   background-color: #0066cc;
 }
 
-
-a [type="submit"] {
-  background-color: #007bff;
-  border: none;
-  border-radius: 3px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 10px;
+button[type="submit"],
+a.button-submit {
+background-color: #007bff;
+border: none;
+border-radius: 3px;
+color: #fff;
+cursor: pointer;
+font-size: 16px;
+padding: 10px;
 }
 
-a:hover [type="submit"] {
-  color: #007bff;
+button[type="submit"]:hover,
+a.button-submit:hover {
+background-color: #0066cc;
 }
 
-
+a.button-submit {
+text-decoration: none;
+}

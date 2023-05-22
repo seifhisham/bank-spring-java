@@ -1,25 +1,45 @@
 package com.bank.bank.Models;
 
+
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "accounts")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Account {
 
+    @OneToMany(mappedBy = "relatedAccount", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Withdraw_Deposit> withdraw_Deposits = new ArrayList<>();
+
+    @OneToMany(mappedBy = "destinationAccount", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Transfers> reciver = new ArrayList<>();
+
+    @OneToMany(mappedBy = "sourceAccount", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Transfers> sender = new ArrayList<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "Type_id")
     private AccountType accounttype;
 
     private double balance;
+
 
 
     public Account() {
