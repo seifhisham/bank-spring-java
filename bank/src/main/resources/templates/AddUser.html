@@ -14,6 +14,9 @@
 			<label for="name">Name:</label>
 			<input type="text" id="name" name="name" th:field="*{name}" />
 
+			<label for="username">Username:</label>
+			<input type="text" id="username" name="username" th:field="*{username}" />
+
 			<label for="password">Password:</label>
 			<input type="password" id="password" name="password" th:field="*{password}" />
 
@@ -23,15 +26,12 @@
 			<label for="phoneNumber">Phone Number:</label>
 			<input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" />
 			
-			<label for="username">Username:</label>
-			<input type="username" id="username" name="username" th:field="*{username}" />
-			
 			<input type="hidden" id="id" name="id" th:field="*{id}" /><br>
 			<br>
 			<button type="submit">Save</button>
 
 		</form>
-		<a href="/thymeleaf/Authentication">Back to Authentication</a>
+		<a href="/thymeleaf/Authentication">Back to Login</a>
 
 	</div>
 </body>
