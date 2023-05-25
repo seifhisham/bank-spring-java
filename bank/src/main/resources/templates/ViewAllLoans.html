@@ -1,32 +1,28 @@
+<!-- ViewAllLoans.html -->
+
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Loan Information</title>
-    <link rel="stylesheet" type="text/css" href="/css/Trans.css">
+    <meta charset="UTF-8">
+    <title>View All Loans</title>
 </head>
-
 <body>
-    <h1>Loan Information</h1>
-
+    <h1>All Loans</h1>
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Related Account</th>
+                <th>Loan ID</th>
                 <th>Amount</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="loan : ${Loans}">
+            <tr th:each="loan : ${loans}">
                 <td th:text="${loan.id}"></td>
-                <td th:text="${loan.relatedAccount.id}"></td>
                 <td th:text="${loan.amount}"></td>
                 <td th:text="${loan.status}"></td>
             </tr>
         </tbody>
     </table>
-
 </body>
-
 </html>
