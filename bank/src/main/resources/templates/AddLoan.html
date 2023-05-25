@@ -1,17 +1,18 @@
-<!-- AddLoan.html -->
-
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org%22%3E/">
 <head>
-   
+
     <title>Add Loan</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css%22%3E">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js%22%3E"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js%22%3E"></script>
+    <link rel="stylesheet" type="text/css" href="/css/addloan.css">
 </head>
 <body>
     <h1>Add Loan</h1>
     <form th:action="@{/thymeleaf/Save-Loan}" method="post">
         <div>
             <label for="accountId">Account ID:</label>
-            <select id="accountId" name="accountId" required>
+            <select id="accountId" name="accountId" class="form-control"required>
                 <option value="">Select an account ID</option>
                 <option th:each="account : ${accountList}" th:value="${account.id}" th:text="${account.id}"></option>
             </select>
