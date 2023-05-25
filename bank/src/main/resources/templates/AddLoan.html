@@ -1,32 +1,28 @@
+<!-- AddLoan.html -->
+
+
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Loan Form</title>
-    <link rel="stylesheet" type="text/css" href="/css/withdraw.css">
+   
+    <title>Add Loan</title>
 </head>
-
 <body>
-    <h1>Loan Application Form</h1>
-
-    <form th:action="@{/thymeleaf/Save-Loan}" th:object="${Loans}" method="post" onsubmit="handleSubmit()">
-
+    <h1>Add Loan</h1>
+    <form th:action="@{/thymeleaf/Save-Loan}" method="post">
         <div>
             <label for="accountId">Account ID:</label>
             <select id="accountId" name="accountId" required>
+                <option value="">Select an account ID</option>
                 <option th:each="account : ${accountList}" th:value="${account.id}" th:text="${account.id}"></option>
-            </select><br>
+            </select>
         </div>
-
+        <br>
         <div>
-            <label for="amount">Loan Amount:</label>
-            <input type="text" id="amount" th:field="*{amount}" />
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" step="0.01" required>
         </div>
-
-        <div>
-            <button type="submit">Submit</button>
-        </div>
-
+        <br>
+        <button type="submit">Save Loan</button>
     </form>
 </body>
-
 </html>
