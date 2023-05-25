@@ -1,33 +1,57 @@
 package com.bank.bank.Services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-import com.bank.bank.Models.Account;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import com.bank.bank.Models.Loan;
+import com.bank.bank.Models.User;
 import com.bank.bank.Models.Loan.LoanStatus;
-import com.bank.bank.Repositories.AccountRepo;
-import com.bank.bank.Repositories.LoanRepo;
 
 @Service
 public class LoanService {
-    @Autowired
-    private AccountRepo accountRepository;
-    @Autowired
-    private LoanRepo loanRepo;
+    
+    private RestTemplate restTemplate;  
+    private String baseUrl="http://localhost:8081";
 
-    public void SaveLoan(double amount, Long RelatedID, LoanStatus loanStatus) {
-        Account account = accountRepository.findById(RelatedID)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid account ID: " + RelatedID));
-
-        Loan loan = new Loan();
-
-        loan.setAmount(amount);
-        loan.setRelatedAccount(account);
-        loan.setStatus(loanStatus.WAITING);
-
-        loanRepo.save(loan);
-
+    public LoanService()
+    {
+        this.restTemplate=new RestTemplate();
     }
 
+    public List<Loan> findAllByRelatedAccountUser(User user) {
+        String url = baseUrl + "/loan/loans?userId=" + user.getId();
+        return restTemplate.getForObject(url, List.class);
+    }
+    
+    public List<Loan> findAll() {
+        String url = baseUrl + "/loan/loans";
+        ResponseEntity<List<Loan>> response = restTemplate.exchange(
+            url,
+            HttpMethod.GET,
+            null,
+            new ParameterizedTypeReference<List<Loan>>() {}
+        );
+        return response.getBody();
+    }
+    
+
+    public Loan SaveLoan(double amount, Long accountId, LoanStatus status) {
+        String url = baseUrl + "/loan";
+    
+        Loan loan = new Loan();
+        loan.setAmount(amount);
+        loan.setRelatedAccount(accountId);
+        loan.setStatus(status);
+    
+        return restTemplate.postForObject(url, loan, Loan.class);
+    }
+    
+    
+    
+    
 }
