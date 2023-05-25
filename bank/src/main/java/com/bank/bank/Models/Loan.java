@@ -1,5 +1,8 @@
 package com.bank.bank.Models;
 
+
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,15 +18,15 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Account relatedAccount;
+    // @ManyToOne
+    private Long relatedAccount;
 
     private double amount;
 
     @Enumerated(EnumType.STRING)
     private LoanStatus status;
 
-    // Add getters/setters and constructors
+
 
     public enum LoanStatus {
         APPROVED,
@@ -34,7 +37,7 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(Long id, Account relatedAccount, double amount, LoanStatus status) {
+    public Loan(Long id, Long relatedAccount, double amount, LoanStatus status) {
         this.id = id;
         this.relatedAccount = relatedAccount;
         this.amount = amount;
@@ -49,11 +52,15 @@ public class Loan {
         this.id = id;
     }
 
-    public Account getRelatedAccount() {
-        return this.relatedAccount;
+    public Long getRelatedAccount() {
+        if (relatedAccount != null) {
+            return relatedAccount;
+        } else {
+            return 0L; // Or any other default value that makes sense in your application
+        }
     }
 
-    public void setRelatedAccount(Account relatedAccount) {
+    public void setRelatedAccount(long relatedAccount) {
         this.relatedAccount = relatedAccount;
     }
 
@@ -78,7 +85,7 @@ public class Loan {
         return this;
     }
 
-    public Loan relatedAccount(Account relatedAccount) {
+    public Loan relatedAccount(long relatedAccount) {
         setRelatedAccount(relatedAccount);
         return this;
     }
@@ -91,6 +98,13 @@ public class Loan {
     public Loan status(LoanStatus status) {
         setStatus(status);
         return this;
+    }
+
+    public void save(Loan loan) {
+    }
+
+    public List<Loan> findAll() {
+        return null;
     }
 
 }
