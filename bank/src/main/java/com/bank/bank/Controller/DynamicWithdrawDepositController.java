@@ -2,7 +2,12 @@ package com.bank.bank.Controller;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -70,15 +75,24 @@ public class DynamicWithdrawDepositController {
         return mav;
     }
 
-    @PostMapping("/Save-Withdraw")
-    public ResponseEntity<Void> saveWithdraw(
-            @RequestParam("accountId") Long accountId,
-            @RequestParam("amount") double amount,
-            @RequestParam("type") Withdraw_Deposit.Type type,
-            @RequestParam("date") String date) throws Throwable {
-        withdrawDepositService.SaveWithdraw(amount, date, type, accountId, TransactionType.WITHDRAW_DEPOSIT);
-        return ResponseEntity.ok().build();
-    }
+    
+ 
+
+@PostMapping("/Save-Withdraw")
+public ResponseEntity<Void> saveWithdraw(
+        @RequestParam("accountId") Long accountId,
+        @RequestParam("amount") double amount,
+        @RequestParam("type") Withdraw_Deposit.Type type,
+        @RequestParam("date") String date) throws Throwable {
+    withdrawDepositService.SaveWithdraw(amount, date, type, accountId, TransactionType.WITHDRAW_DEPOSIT);
+    
+    // Create a ResponseEntity with a redirect status and the location header set to the "View-Withdraw-Id" URL
+    String redirectUrl = "/thymeleaf/View-Withdraw-Id";
+    return ResponseEntity.status(HttpStatus.FOUND)
+            .header("Location", redirectUrl)
+            .build();
+}
+
     
 }
 
