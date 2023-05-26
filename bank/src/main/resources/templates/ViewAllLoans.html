@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>        
-    <link rel="stylesheet" type="text/css" href="/css/viewallloans.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/viewallloans.css">
+
 <head>
     <meta charset="UTF-8">
     <title>View All Loans</title>
 </head>
+
 <body>
     <div>
-    <h1>All Loans</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Loan ID</th>
-                <th>Amount</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="loan : ${loans}">
-                <td th:text="${loan.id}"></td>
-                <td th:text="${loan.amount}"></td>
-                <td th:text="${loan.status}"></td>
-            </tr>
-        </tbody>
-    </table>
+        <h1>All Loans</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Loan ID</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="loan : ${loans}">
+                    <td th:text="${loan.id}"></td>
+                    <td th:text="${loan.amount}"></td>
+                    <td th:text="${loan.status}"></td>
+                    <td>
+                        <a th:href="@{/thymeleaf/Accept-Loan/(id=${loan.id})}">Accept</a> |
+                        <a th:href="@{/thymeleaf/Decline-Loan/(id=${loan.id})}">Decline</a>
+                    </td>
+                </tr>
+            </tbody>
+
+
+        </table>
     </div>
 </body>
+
 </html>
