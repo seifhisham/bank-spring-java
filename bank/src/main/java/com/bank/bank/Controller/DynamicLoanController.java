@@ -57,7 +57,7 @@ public class DynamicLoanController {
     @GetMapping("Add-Loan")
     public ModelAndView getAddLoanForm(@AuthenticationPrincipal User user) {
         ModelAndView mav = new ModelAndView("AddLoan.html");
-       
+
         Loan loan = new Loan();
 
         mav.addObject("loan", loan);
@@ -69,20 +69,37 @@ public class DynamicLoanController {
     public ResponseEntity<String> saveLoan(
             @RequestParam("accountId") Long accountId,
             @RequestParam("amount") double amount) {
-    
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
-    
+
         Loan savedLoan = loanService.SaveLoan(amount, accountId, LoanStatus.WAITING);
-    
+
         if (savedLoan != null) {
             return ResponseEntity.ok().body("Loan saved successfully");
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save loan");
         }
     }
-    
 
-    
-    
+    @GetMapping("/Accept-Loan{id}")
+    public ResponseEntity<String> acceptLoan(@RequestParam("id") Long id) {
+        Loan acceptedLoan = loanService.acceptLoan(id);
+        if (acceptedLoan != null) {
+            return ResponseEntity.ok().body("Loan accepted successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to accept loan");
+        }
+    }
+
+    @GetMapping("/Decline-Loan{id}")
+    public ResponseEntity<String> declineLoan(@RequestParam("id") Long id) {
+        Loan declinedLoan = loanService.declineLoan(id);
+        if (declinedLoan != null) {
+            return ResponseEntity.ok().body("Loan declined successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to decline loan");
+        }
+    }
+
 }
