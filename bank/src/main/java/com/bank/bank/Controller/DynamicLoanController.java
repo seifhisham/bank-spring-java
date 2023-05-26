@@ -82,23 +82,15 @@ public class DynamicLoanController {
     
 
     @GetMapping("/Accept-Loan{id}")
-    public ResponseEntity<String> acceptLoan(@RequestParam("id") Long id) {
+    public RedirectView  acceptLoan(@RequestParam("id") Long id) {
         Loan acceptedLoan = loanService.acceptLoan(id);
-        if (acceptedLoan != null) {
-            return ResponseEntity.ok().body("Loan accepted successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to accept loan");
-        }
+        return new RedirectView("/thymeleaf/View-Loan");
     }
 
     @GetMapping("/Decline-Loan{id}")
-    public ResponseEntity<String> declineLoan(@RequestParam("id") Long id) {
+    public RedirectView declineLoan(@RequestParam("id") Long id) {
         Loan declinedLoan = loanService.declineLoan(id);
-        if (declinedLoan != null) {
-            return ResponseEntity.ok().body("Loan declined successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to decline loan");
-        }
+        return new RedirectView("/thymeleaf/View-Loan");
     }
 
 }
