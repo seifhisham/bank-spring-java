@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
 import com.bank.bank.Models.Loan;
 import com.bank.bank.Models.Loan.LoanStatus;
 import com.bank.bank.Repositories.AccountRepo;
@@ -66,21 +68,18 @@ public class DynamicLoanController {
     }
 
     @PostMapping("/Save-Loan")
-    public ResponseEntity<String> saveLoan(
+    public RedirectView saveLoan(
             @RequestParam("accountId") Long accountId,
             @RequestParam("amount") double amount) {
-
+    
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
-
+    
         Loan savedLoan = loanService.SaveLoan(amount, accountId, LoanStatus.WAITING);
-
-        if (savedLoan != null) {
-            return ResponseEntity.ok().body("Loan saved successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save loan");
-        }
+    
+        return new RedirectView("/thymeleaf/View-Loan-Id");
     }
+    
 
     @GetMapping("/Accept-Loan{id}")
     public ResponseEntity<String> acceptLoan(@RequestParam("id") Long id) {
