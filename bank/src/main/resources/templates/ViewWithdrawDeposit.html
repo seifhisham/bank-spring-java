@@ -5,6 +5,12 @@
 </head>
 <body>
     <h1>Withdraw/Deposit Transactions</h1>
+    
+    <!-- Add a success message if needed -->
+    <div th:if="${successMessage}">
+        <p th:text="${successMessage}" class="success-message"></p>
+    </div>
+    
     <table>
         <tr>
             <th>ID</th>
