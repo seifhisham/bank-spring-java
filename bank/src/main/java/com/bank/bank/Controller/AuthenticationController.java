@@ -55,7 +55,7 @@ public class AuthenticationController {
 
         this.userRepo.save(user);
 
-        return "redirect:/thymeleaf/View-User";
+        return "redirect:/thymeleaf/login";
 
     }
 

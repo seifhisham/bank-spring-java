@@ -37,13 +37,10 @@
                     <td th:text="${user.password}" />
                     <td th:text="${user.Role}" />
                     <td>
-                        <button type="submit"><a th:href="@{/thymeleaf/Update-Role(Id=${user.id})}"><b>Change
-                                    Role</b></a></button>
+                        <button type="submit"><a th:href="@{/thymeleaf/Update-Role(Id=${user.id})}"><b>Edit
+                                    </b></a></button>
                     </td>
-                    <td>
-                        <button type="submit"><a
-                                th:href="@{/thymeleaf/Update-User(Id=${user.id})}"><b>Update</b></a></button>
-                    </td>
+            
                     <td>
                         <button type="submit"><a
                                 th:href="@{/thymeleaf/Delete-User(Id=${user.id})}"><b>Delete</b></a></button>
@@ -51,6 +48,7 @@
                 </tr>
             </tbody>
         </table>
+        <a href="/AdminDashboard.html">Back to Home</a>
     </div>
 </body>
 
