@@ -25,7 +25,7 @@ public class ExceptionHandlingAspect {
             return joinPoint.proceed();
         } catch (Throwable e) {
             Map<String, Integer> res = new HashMap<>();
-            res.put("Your balance is insufficient for this withdrawal.", 404);
+            res.put(" The Process Was Not Completed Successfully.", 404);
             return new ResponseEntity<>(res, HttpStatus.NOT_FOUND);
         }
     }
